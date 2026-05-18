@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ระบบจองบัตรอุทยานแห่งชาติ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mingcute_icon@2.9.71/font/Mingcute.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+[class^='mgc_']::before, [class*=' mgc_']::before { color: inherit !important; font-size: inherit !important; }
+.mgc { display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+.acc-body-open { animation: fadeIn .2s ease; }
+body {
+  font-family: 'Noto Sans Thai', Tahoma, sans-serif;
+  background: #1C1C1E;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 24px 16px;
+}
+#phone-wrap {
+  width: 375px;
+  height: 720px;
+  position: relative;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,.55);
+  flex-shrink: 0;
+}
+.screen {
+  display: none;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 375px;
+  height: 720px;
+  flex-direction: column;
+  background: #F7F8F7;
+  overflow: hidden;
+}
+.screen.active { display: flex; }
+.scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #F7F8F7;
+  -webkit-overflow-scrolling: touch;
+}
+.scroll-area::-webkit-scrollbar { width: 0; }
+input, select, button, label, span, div, p, h1, h2, h3, h4, h5 {
+  font-family: 'Noto Sans Thai', Tahoma, sans-serif !important;
+}
+input, select {
+  background-color: #FFFFFF !important;
+  color: #1A2920 !important;
+  -webkit-text-fill-color: #1A2920 !important;
+  border: 1.5px solid #D4D8D5 !important;
+  border-radius: 8px !important;
+  height: 46px;
+  width: 100%;
+  padding: 0 13px;
+  font-size: 14px;
+  outline: none;
+  display: block;
+  appearance: none;
+  -webkit-appearance: none;
+}
+input:focus, select:focus {
+  border-color: #2D8F55 !important;
+  box-shadow: 0 0 0 3px rgba(45,143,85,.12) !important;
+}
+input::placeholder { color: #8A9E92 !important; }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset !important;
+  -webkit-text-fill-color: #1A2920 !important;
+}
+.btn-green {
+  width: 100%;
+  height: 50px;
+  background-color: #1F7A47 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color .15s;
+}
+.btn-green:hover { background-color: #1B5E38 !important; }
+.btn-outline {
+  width: 100%;
+  height: 50px;
+  background-color: #FFFFFF !important;
+  color: #1F7A47 !important;
+  border: 2px solid #1F7A47 !important;
+  border-radius: 10px !important;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color .15s;
+  margin-top: 8px;
+}
+.btn-outline:hover { background-color: #EEF8F3 !important; }
+.btn-ghost {
+  width: 100%;
+  height: 50px;
+  background-color: #FFFFFF !important;
+  color: #4A5E52 !important;
+  border: 1.5px solid #D4D8D5 !important;
+  border-radius: 10px !important;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.btn-ghost:hover { background-color: #F7F8F7 !important; }
+.fld-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #4A5E52;
+  margin-bottom: 5px;
+  letter-spacing: .02em;
+}
+.card-box {
+  background: #FFFFFF;
+  border-radius: 14px;
+  border: 1px solid #EAECEB;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.svc-btn-highlight {
+  border-radius: 10px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  cursor: pointer;
+  border: 2px solid #1F7A47;
+  background-color: #1F7A47 !important;
+  color: #FFFFFF !important;
+  transition: background-color .15s;
+  text-align: left;
+}
+.svc-btn-highlight:hover { background-color: #1B5E38 !important; }
+.svc-btn-dim {
+  border-radius: 10px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  cursor: not-allowed;
+  border: 2px solid #D4D8D5;
+  background-color: #FFFFFF !important;
+  opacity: .45;
+  text-align: left;
+}
+.chip-sel {
+  background-color: #1F7A47 !important;
+  border-color: #1F7A47 !important;
+  color: #FFFFFF !important;
+}
+.chip-unsel {
+  background-color: #FFFFFF !important;
+  border-color: #D4D8D5 !important;
+  color: #4A5E52 !important;
+}
+.pay-sel {
+  border-color: #1F7A47 !important;
+  background-color: #EEF8F3 !important;
+}
+.pay-unsel {
+  border-color: #D4D8D5 !important;
+  background-color: #FFFFFF !important;
+}
+.obox {
+  width: 46px !important;
+  height: 56px !important;
+  background-color: #FFFFFF !important;
+  color: #1A2920 !important;
+  -webkit-text-fill-color: #1A2920 !important;
+  border: 2px solid #D4D8D5 !important;
+  border-radius: 8px !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  padding: 0 !important;
+}
+.obox.err { border-color: #C0392B !important; }
+.dtab { flex: 1; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; color: #8A9E92; cursor: pointer; border-bottom: 2.5px solid transparent; }
+.dtab.on { color: #1F7A47; border-bottom-color: #1F7A47; font-weight: 700; }
+.qty-btn {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 2px solid #1F7A47 !important;
+  background-color: #FFFFFF !important;
+  color: #1F7A47 !important;
+  font-size: 20px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; line-height: 1;
+  transition: all .15s;
+}
+.qty-btn:hover { background-color: #1F7A47 !important; color: #FFFFFF !important; }
+</style>
+</head>
+<body>
+
+<div id="phone-wrap">
+
+<!-- LOGIN -->
+<div class="screen" id="s-login">
+  <div style="background:#0D3320;padding:52px 20px 36px;text-align:center;flex-shrink:0;">
+    <div style="width:76px;height:76px;border-radius:22px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:2px solid rgba(255,255,255,.2);">
+      <i class="mgc_mountain_2_line" style="font-size:38px;color:#FFFFFF;"></i>
+    </div>
+    <h1 style="color:#FFFFFF;font-size:23px;font-weight:700;margin-bottom:4px;">ยินดีต้อนรับ</h1>
+    <p style="color:rgba(255,255,255,.65);font-size:13px;">ระบบจองบัตรอุทยานแห่งชาติ</p>
+  </div>
+  <div class="scroll-area"><div style="padding:20px;">
+    <div style="margin-bottom:14px;">
+      <label class="fld-label">อีเมล / เบอร์โทรศัพท์</label>
+      <input type="text" value="demo@example.com" placeholder="กรอกอีเมลหรือเบอร์โทร">
+    </div>
+    <div style="margin-bottom:18px;">
+      <label class="fld-label">รหัสผ่าน</label>
+      <input type="password" value="12345678" placeholder="รหัสผ่าน">
+    </div>
+    <button class="btn-green" onclick="go('s-home')">เข้าสู่ระบบ</button>
+    <div style="display:flex;align-items:center;gap:10px;margin:14px 0;">
+      <div style="flex:1;height:1px;background:#EAECEB;"></div>
+      <span style="font-size:12px;color:#8A9E92;">หรือ</span>
+      <div style="flex:1;height:1px;background:#EAECEB;"></div>
+    </div>
+    <button class="btn-outline" onclick="go('s-register')"><i class="mgc_user_add_line" style="font-size:18px;"></i>สมัครสมาชิกใหม่</button>
+    <button class="btn-ghost"><i class="mgc_idcard_line" style="font-size:18px;"></i>เข้าสู่ระบบด้วย ThaID</button>
+    <p style="text-align:center;margin-top:16px;font-size:13px;">
+      <span style="color:#1F7A47;cursor:pointer;font-weight:700;" onclick="go('s-home')">ลืมรหัสผ่าน?</span>
+    </p>
+  </div></div>
+</div>
+
+<!-- REGISTER -->
+<div class="screen" id="s-register">
+  <div style="height:44px;background:#0D3320;display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;">
+    <span style="color:rgba(255,255,255,.85);font-size:12px;font-weight:600;">9:41</span>
+    <span style="color:rgba(255,255,255,.85);font-size:12px;">●●●</span>
+  </div>
+  <div style="background:#1B5E38;padding:10px 16px 14px;flex-shrink:0;display:flex;align-items:center;gap:10px;">
+    <button onclick="go('s-login')" style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);border:none;color:#FFFFFF;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">←</button>
+    <span style="color:#FFFFFF;font-size:17px;font-weight:700;">สมัครสมาชิก</span>
+  </div>
+  <div class="scroll-area"><div style="padding:16px;">
+    <p style="font-size:12px;font-weight:700;color:#4A5E52;letter-spacing:.05em;margin-bottom:10px;">ข้อมูลส่วนตัว</p>
+    <div style="margin-bottom:14px;"><label class="fld-label">คำนำหน้า</label>
+      <select style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2214%22 height=%2214%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%234A5E52%22 stroke-width=%222%22%3E%3Cpolyline points=%226 9 12 15 18 9%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;">
+        <option>นาย</option><option>นาง</option><option>นางสาว</option>
+      </select>
+    </div>
+    <div style="margin-bottom:14px;"><label class="fld-label">ชื่อ-นามสกุล</label><input type="text" placeholder="ชื่อ นามสกุล"></div>
+    <div style="margin-bottom:14px;"><label class="fld-label">เลขบัตรประชาชน</label><input type="text" placeholder="1-2345-67890-12-3"></div>
+    <div style="margin-bottom:14px;"><label class="fld-label">วันเกิด</label><input type="date"></div>
+    <div style="margin-bottom:14px;"><label class="fld-label">สัญชาติ</label>
+      <select style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2214%22 height=%2214%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%234A5E52%22 stroke-width=%222%22%3E%3Cpolyline points=%226 9 12 15 18 9%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;">
+        <option>ไทย</option><option>ต่างชาติ</option>
+      </select>
+    </div>
+    <div style="height:1px;background:#EAECEB;margin:14px 0;"></div>
+    <p style="font-size:12px;font-weight:700;color:#4A5E52;letter-spacing:.05em;margin-bottom:10px;">ข้อมูลติดต่อ</p>
+    <div style="margin-bottom:14px;"><label class="fld-label">เบอร์โทรศัพท์</label><input type="tel" placeholder="08x-xxx-xxxx"></div>
+    <div style="margin-bottom:14px;"><label class="fld-label">อีเมล</label><input type="email" placeholder="email@example.com"></div>
+    <div style="margin-bottom:14px;"><label class="fld-label">รหัสผ่าน</label><input type="password" placeholder="อย่างน้อย 8 ตัวอักษร"></div>
+    <div style="margin-bottom:18px;"><label class="fld-label">ยืนยันรหัสผ่าน</label><input type="password" placeholder="กรอกรหัสผ่านอีกครั้ง"></div>
+    <button class="btn-green" onclick="go('s-otp')">ขอรับ OTP เพื่อยืนยันตัวตน</button>
+    <div style="height:20px;"></div>
+  </div></div>
+</div>
+
+<!-- OTP -->
+<div class="screen" id="s-otp">
+  <div style="height:44px;background:#0D3320;display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;">
+    <span style="color:rgba(255,255,255,.85);font-size:12px;font-weight:600;">9:41</span><span style="color:rgba(255,255,255,.85);font-size:12px;">●●●</span>
+  </div>
+  <div style="background:#1B5E38;padding:10px 16px 14px;flex-shrink:0;display:flex;align-items:center;gap:10px;">
+    <button onclick="go('s-register')" style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);border:none;color:#FFFFFF;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;">←</button>
+    <span style="color:#FFFFFF;font-size:17px;font-weight:700;">ยืนยัน OTP</span>
+  </div>
+  <div class="scroll-area"><div style="padding:20px;text-align:center;">
+    <div style="width:72px;height:72px;border-radius:50%;background:#D6F0E2;display:flex;align-items:center;justify-content:center;margin:24px auto 16px;">
+      <i class="mgc_lock_line" style="font-size:32px;color:#1F7A47;"></i>
+    </div>
+    <h3 style="font-size:19px;font-weight:700;color:#1A2920;margin-bottom:8px;">ยืนยัน OTP</h3>
+    <p style="font-size:13px;color:#4A5E52;line-height:1.6;margin-bottom:14px;">ระบบส่งรหัส OTP ไปยัง<br><strong style="color:#1A2920;">08x-xxx-xxxx</strong></p>
+    <div style="background:#EEF8F3;border:1px solid #D6F0E2;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:13px;color:#1B5E38;">
+      รหัส OTP ทดสอบ: <strong>1 2 3 4 5 6</strong>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:20px;">
+      <input class="obox" id="o1" maxlength="1" type="text" oninput="onxt(this,'o2')">
+      <input class="obox" id="o2" maxlength="1" type="text" oninput="onxt(this,'o3')">
+      <input class="obox" id="o3" maxlength="1" type="text" oninput="onxt(this,'o4')">
+      <input class="obox" id="o4" maxlength="1" type="text" oninput="onxt(this,'o5')">
+      <input class="obox" id="o5" maxlength="1" type="text" oninput="onxt(this,'o6')">
+      <input class="obox" id="o6" maxlength="1" type="text" oninput="ochk()">
+    </div>
+    <button class="btn-green" onclick="vOtp()">ยืนยัน OTP</button>
+    <p style="margin-top:14px;font-size:13px;color:#8A9E92;">ไม่ได้รับรหัส? <span style="color:#1F7A47;cursor:pointer;font-weight:700;">ส่งอีกครั้ง</span></p>
+    <div style="height:20px;"></div>
+  </div></div>
+</div>
+
+<!-- OTP DONE -->
+<div class="screen" id="s-otp-done">
+  <div style="height:44px;background:#0D3320;display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;">
+    <span style="color:rgba(255,255,255,.85);font-size:12px;">9:41</span><span style="color:rgba(255,255,255,.85);font-size:12px;">●●●</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;background:#F7F8F7;">
+    <div style="width:88px;height:88px;border-radius:50%;background:#D6F0E2;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+      <i class="mgc_check_circle_line" style="font-size:44px;color:#1F7A47;"></i>
+    </div>
+    <h2 style="font-size:21px;font-weight:700;color:#1A2920;margin-bottom:8px;">สมัครสมาชิกสำเร็จ!</h2>
+    <p style="font-size:13px;color:#4A5E52;text-align:center;line-height:1.7;margin-bottom:28px;">ยินดีต้อนรับสู่ระบบจองบัตรอุทยานแห่งชาติ<br>คุณสามารถเข้าสู่ระบบได้แล้ว</p>
+    <button class="btn-green" style="width:200px;" onclick="go('s-login')">ไปที่หน้าเข้าสู่ระบบ</button>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="screen" id="s-home">
+  <div style="background:#0D3320;padding:14px 16px 18px;flex-shrink:0;">
+    <div style="color:rgba(255,255,255,.6);font-size:12px;margin-bottom:2px;">สวัสดี <i class="mgc_finger_tap_line" style="font-size:13px;vertical-align:middle;"></i></div>
+    <div style="color:#FFFFFF;font-size:19px;font-weight:700;margin-bottom:14px;">คุณสมชาย ใจดี</div>
+    <div style="background:rgba(255,255,255,.12);border-radius:8px;display:flex;align-items:center;gap:8px;padding:0 13px;height:42px;">
+      <i class="mgc_search_line" style="font-size:18px;color:rgba(255,255,255,.55);flex-shrink:0;"></i>
+      <input type="text" placeholder="ค้นหาอุทยานแห่งชาติ..." style="background:transparent!important;border:none!important;color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important;flex:1;font-size:13px;height:40px;padding:0;">
+    </div>
+  </div>
+  <div class="scroll-area"><div style="padding:16px;">
+    <div style="display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px;">
+      <button style="height:32px;padding:0 14px;border-radius:20px;border:none;background-color:#1F7A47;color:#FFFFFF;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;">ทั้งหมด</button>
+      <button style="height:32px;padding:0 14px;border-radius:20px;border:1.5px solid #D4D8D5;background-color:#FFFFFF;color:#4A5E52;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;">ภาคเหนือ</button>
+      <button style="height:32px;padding:0 14px;border-radius:20px;border:1.5px solid #D4D8D5;background-color:#FFFFFF;color:#4A5E52;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;">ภาคกลาง</button>
+      <button style="height:32px;padding:0 14px;border-radius:20px;border:1.5px solid #D4D8D5;background-color:#FFFFFF;color:#4A5E52;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;">ภาคใต้</button>
+      <button style="height:32px;padding:0 14px;border-radius:20px;border:1.5px solid #D4D8D5;background-color:#FFFFFF;color:#4A5E52;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;">ภาคตะวันออก</button>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <h3 style="font-size:15px;font-weight:700;color:#1A2920;">อุทยานแนะนำ</h3>
+      <a style="font-size:12px;color:#1F7A47;cursor:pointer;font-weight:600;">ดูทั้งหมด</a>
+    </div>
+    <div id="park-cards"></div>
+    <div style="height:8px;"></div>
+  </div></div>
+  <div style="height:66px;background:#FFFFFF;border-top:1px solid #EAECEB;display:flex;align-items:center;justify-content:space-around;flex-shrink:0;">
+    <div id="nav-home" onclick="go('s-home')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_home_3_line" style="font-size:22px;color:#1F7A47;"></i><span style="font-size:10px;color:#1F7A47;font-weight:700;">หน้าหลัก</span></div>
+    <div id="nav-map" onclick="go('s-map')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_map_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">แผนที่</span></div>
+    <div id="nav-tickets" onclick="go('s-tickets')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_ticket_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">บัตรของฉัน</span></div>
+    <div id="nav-notif" onclick="go('s-notif')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;position:relative;"><i class="mgc_notification_line" style="font-size:22px;color:#8A9E92;"></i><span style="position:absolute;top:6px;right:8px;width:8px;height:8px;background:#E53E3E;border-radius:50%;border:1.5px solid #FFFFFF;"></span><span style="font-size:10px;color:#8A9E92;">แจ้งเตือน</span></div>
+    <div id="nav-profile" onclick="go('s-profile')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_user_3_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">โปรไฟล์</span></div>
+  </div>
+</div>
+
+<!-- PARK DETAIL -->
+<div class="screen" id="s-park">
+  <div style="height:230px;position:relative;overflow:hidden;flex-shrink:0;">
+    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=750&q=75" style="width:100%;height:100%;object-fit:cover;" alt="park">
+    <div style="position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(8,32,16,.8));"></div>
+    <button onclick="go('s-home')" style="position:absolute;top:52px;left:14px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.35);border:none;color:#FFFFFF;font-size:16px;cursor:pointer;">←</button>
+    <div style="position:absolute;bottom:14px;left:16px;right:16px;">
+      <h2 style="color:#FFFFFF;font-size:19px;font-weight:700;margin-bottom:3px;">ดอยอินทนนท์</h2>
+      <p style="color:rgba(255,255,255,.75);font-size:12px;">📍 เชียงใหม่ • เปิด 06:00–18:00 น.</p>
+    </div>
+  </div>
+  <div style="display:flex;background:#FFFFFF;border-bottom:1px solid #EAECEB;flex-shrink:0;" id="park-tabs">
+    <div class="dtab on" onclick="showTab('info')">ข้อมูล</div>
+    <div class="dtab" onclick="showTab('gallery')">แกลเลอรี</div>
+    <div class="dtab" onclick="showTab('review')">รีวิว</div>
+  </div>
+  <div class="scroll-area">
+    <!-- INFO -->
+    <div id="tab-info" style="padding:16px;">
+      <p style="font-size:13px;color:#4A5E52;line-height:1.7;margin-bottom:14px;">อุทยานแห่งชาติดอยอินทนนท์ครอบคลุมพื้นที่กว่า 482 ตร.กม. มียอดเขาสูงสุด 2,565 เมตร เป็นแหล่งท่องเที่ยวยอดนิยมทางภาคเหนือ</p>
+      <div style="display:flex;gap:10px;margin-bottom:10px;align-items:center;"><i class="mgc_time_line" style="font-size:16px;color:#1F7A47;flex-shrink:0;"></i><span style="font-size:13px;color:#4A5E52;">เปิดทุกวัน 06:00–18:00 น.</span></div>
+      <div style="display:flex;gap:10px;margin-bottom:10px;align-items:center;"><i class="mgc_phone_line" style="font-size:16px;color:#1F7A47;flex-shrink:0;"></i><span style="font-size:13px;color:#4A5E52;">053-286-729</span></div>
+      <div style="display:flex;gap:10px;margin-bottom:14px;align-items:center;"><i class="mgc_location_line" style="font-size:16px;color:#1F7A47;flex-shrink:0;"></i><span style="font-size:13px;color:#4A5E52;">อ.จอมทอง จ.เชียงใหม่ 50160</span></div>
+      <div style="height:1px;background:#EAECEB;margin-bottom:14px;"></div>
+      <p style="font-size:12px;font-weight:700;color:#4A5E52;letter-spacing:.05em;margin-bottom:12px;">บริการออนไลน์</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+        <button class="svc-btn-highlight" onclick="go('s-step1')">
+          <div style="width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;"><i class="mgc_ticket_line" style="font-size:20px;color:#FFFFFF;"></i></div>
+          <div style="font-size:13px;font-weight:700;color:#FFFFFF;">E-Ticket</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.75);">ซื้อบัตรเข้าชม</div>
+        </button>
+        <button class="svc-btn-dim">
+          <div style="width:34px;height:34px;border-radius:8px;background:#EEF8F3;display:flex;align-items:center;justify-content:center;"><i class="mgc_calendar_line" style="font-size:20px;color:#1F7A47;"></i></div>
+          <div style="font-size:13px;font-weight:700;color:#1A2920;">E-Booking</div>
+          <div style="font-size:11px;color:#8A9E92;">จองที่พัก</div>
+        </button>
+        <button class="svc-btn-dim">
+          <div style="width:34px;height:34px;border-radius:8px;background:#EEF8F3;display:flex;align-items:center;justify-content:center;"><i class="mgc_document_line" style="font-size:20px;color:#1F7A47;"></i></div>
+          <div style="font-size:13px;font-weight:700;color:#1A2920;">E-Permit</div>
+          <div style="font-size:11px;color:#8A9E92;">ขออนุญาต</div>
+        </button>
+        <button class="svc-btn-dim">
+          <div style="width:34px;height:34px;border-radius:8px;background:#EEF8F3;display:flex;align-items:center;justify-content:center;"><i class="mgc_movie_line" style="font-size:20px;color:#1F7A47;"></i></div>
+          <div style="font-size:13px;font-weight:700;color:#1A2920;">E-Filming</div>
+          <div style="font-size:11px;color:#8A9E92;">ขออนุญาตถ่ายทำ</div>
+        </button>
+      </div>
+      <div style="height:1px;background:#EAECEB;margin-bottom:14px;"></div>
+      <p style="font-size:12px;font-weight:700;color:#4A5E52;letter-spacing:.05em;margin-bottom:10px;">ราคาบัตรเข้าชม</p>
+      <div style="background:#F7F8F7;border-radius:8px;border:1px solid #EAECEB;overflow:hidden;">
+        <div style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #EAECEB;"><span style="font-size:13px;color:#4A5E52;">ผู้ใหญ่ (ไทย)</span><strong style="font-size:14px;font-weight:700;color:#1B5E38;">฿200</strong></div>
+        <div style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #EAECEB;"><span style="font-size:13px;color:#4A5E52;">เด็ก (ไทย)</span><strong style="font-size:14px;font-weight:700;color:#1B5E38;">฿100</strong></div>
+        <div style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #EAECEB;"><span style="font-size:13px;color:#4A5E52;">ผู้ใหญ่ (ต่างชาติ)</span><strong style="font-size:14px;font-weight:700;color:#1B5E38;">฿400</strong></div>
+        <div style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #EAECEB;"><span style="font-size:13px;color:#4A5E52;">รถเก๋ง</span><strong style="font-size:14px;font-weight:700;color:#1B5E38;">฿50</strong></div>
+        <div style="display:flex;justify-content:space-between;padding:10px 14px;"><span style="font-size:13px;color:#4A5E52;">รถจักรยานยนต์</span><strong style="font-size:14px;font-weight:700;color:#1B5E38;">฿20</strong></div>
+      </div>
+      <div style="height:16px;"></div>
+    </div>
+    <!-- GALLERY -->
+    <div id="tab-gallery" style="display:none;padding:16px;">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;border-radius:10px;overflow:hidden;">
+        <div style="aspect-ratio:1;overflow:hidden;"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=250&q=65" style="width:100%;height:100%;object-fit:cover;" alt=""></div>
+        <div style="aspect-ratio:1;overflow:hidden;"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=250&q=65" style="width:100%;height:100%;object-fit:cover;" alt=""></div>
+        <div style="aspect-ratio:1;overflow:hidden;"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=250&q=65" style="width:100%;height:100%;object-fit:cover;" alt=""></div>
+        <div style="aspect-ratio:1;overflow:hidden;"><img src="https://images.unsplash.com/photo-1518021964703-4b2030f03085?w=250&q=65" style="width:100%;height:100%;object-fit:cover;" alt=""></div>
+        <div style="aspect-ratio:1;overflow:hidden;"><img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=250&q=65" style="width:100%;height:100%;object-fit:cover;" alt=""></div>
+        <div style="aspect-ratio:1;overflow:hidden;"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=250&q=65" style="width:100%;height:100%;object-fit:cover;" alt=""></div>
+        <div style="aspect-ratio:1;overflow:hidden;"><img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=250&q=65" style="width:100%;height:100%;object-fit:cover;" alt=""></div>
+        <div style="aspect-ratio:1;overflow:hidden;"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=250&q=65" style="width:100%;height:100%;object-fit:cover;" alt=""></div>
+        <div style="aspect-ratio:1;overflow:hidden;"><img src="https://images.unsplash.com/photo-1476231682828-37e571bc172f?w=250&q=65" style="width:100%;height:100%;object-fit:cover;" alt=""></div>
+      </div>
+      <div style="height:16px;"></div>
+    </div>
+    <!-- REVIEW -->
+    <div id="tab-review" style="display:none;padding:16px;">
+      <div style="display:flex;align-items:center;gap:16px;background:#EEF8F3;border:1px solid #D6F0E2;border-radius:10px;padding:14px;margin-bottom:16px;">
+        <div style="font-size:40px;font-weight:700;color:#1B5E38;line-height:1;">4.8</div>
+        <div><div style="color:#F4A400;font-size:14px;letter-spacing:1px;">★★★★★</div><div style="font-size:12px;color:#8A9E92;margin-top:3px;">จาก 1,284 รีวิว</div></div>
+      </div>
+      <div style="padding:12px 0;border-bottom:1px solid #EAECEB;"><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="font-size:14px;font-weight:700;color:#1A2920;">สุภาพร ม.</span><span style="color:#F4A400;font-size:12px;">★★★★★</span></div><p style="font-size:13px;color:#4A5E52;line-height:1.6;">บรรยากาศดีมาก อากาศเย็นสบาย ดอกไม้สวยมากโดยเฉพาะช่วงเช้า แนะนำให้มาก่อน 8 โมง</p></div>
+      <div style="padding:12px 0;border-bottom:1px solid #EAECEB;"><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="font-size:14px;font-weight:700;color:#1A2920;">วิชัย ก.</span><span style="color:#F4A400;font-size:12px;">★★★★☆</span></div><p style="font-size:13px;color:#4A5E52;line-height:1.6;">วิวสวยมาก เดินเส้นทางธรรมชาติสนุก แต่ช่วงวันหยุดคนเยอะ ควรจองล่วงหน้า</p></div>
+      <div style="padding:12px 0;"><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="font-size:14px;font-weight:700;color:#1A2920;">นันทิกา ร.</span><span style="color:#F4A400;font-size:12px;">★★★★★</span></div><p style="font-size:13px;color:#4A5E52;line-height:1.6;">มาครั้งที่สามแล้ว ยังคงประทับใจทุกครั้ง เจ้าหน้าที่บริการดีมาก</p></div>
+      <div style="height:16px;"></div>
+    </div>
+  </div>
+  <div style="padding:12px 16px;background:#FFFFFF;border-top:1px solid #EAECEB;flex-shrink:0;">
+    <button class="btn-green" onclick="go('s-step1')"><i class="mgc_ticket_line" style="font-size:18px;"></i>ซื้อ E-Ticket</button>
+  </div>
+</div>
+
+<!-- STEP 1 -->
+<div class="screen" id="s-step1">
+  <div style="height:44px;background:#0D3320;display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;"><span style="color:rgba(255,255,255,.85);font-size:12px;">9:41</span><span style="color:rgba(255,255,255,.85);font-size:12px;">●●●</span></div>
+  <div style="background:#1B5E38;padding:10px 16px 14px;flex-shrink:0;display:flex;align-items:center;gap:10px;">
+    <button onclick="go('s-park')" style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);border:none;color:#FFFFFF;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;">←</button>
+    <span style="color:#FFFFFF;font-size:17px;font-weight:700;">เลือกวันและบัตร</span>
+  </div>
+  <div id="steps1" style="display:flex;align-items:flex-start;padding:14px 20px 8px;background:#FFFFFF;border-bottom:1px solid #EAECEB;flex-shrink:0;"></div>
+  <div class="scroll-area"><div style="padding:16px;">
+    <div class="card-box">
+      <p style="font-size:12px;font-weight:700;color:#4A5E52;letter-spacing:.05em;margin-bottom:10px;">เลือกวันที่เข้าชม</p>
+      <div id="date-chips" style="display:flex;gap:7px;overflow-x:auto;padding-bottom:2px;margin-bottom:14px;"></div>
+      <p style="font-size:12px;font-weight:700;color:#4A5E52;letter-spacing:.05em;margin-bottom:8px;">รอบการเข้าชมอุทยาน</p>
+      <div style="display:flex;gap:8px;margin-bottom:4px;">
+        <button id="r-morning" onclick="pickRound('morning')" style="flex:1;height:50px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;border:1.5px solid #1F7A47;background-color:#1F7A47;color:#FFFFFF;transition:all .15s;">รอบเช้า<span style="font-size:11px;font-weight:400;color:rgba(255,255,255,.75);">09:00 น.</span></button>
+        <button id="r-afternoon" onclick="pickRound('afternoon')" style="flex:1;height:50px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;border:1.5px solid #D4D8D5;background-color:#FFFFFF;color:#4A5E52;transition:all .15s;">รอบบ่าย<span style="font-size:11px;font-weight:400;color:#8A9E92;">13:00 น.</span></button>
+      </div>
+    </div>
+    <div class="card-box">
+      <p style="font-size:12px;font-weight:700;color:#4A5E52;letter-spacing:.05em;margin-bottom:10px;">จำนวนบัตรเข้าชม</p>
+      <div id="qty-rows"></div>
+    </div>
+    <div class="card-box">
+      <p style="font-size:12px;font-weight:700;color:#4A5E52;letter-spacing:.05em;margin-bottom:10px;">ยานพาหนะ (ถ้ามี)</p>
+      <div style="display:flex;gap:7px;">
+        <button id="v-none" onclick="pickVeh('none')" style="flex:1;padding:10px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;border:1.5px solid #1F7A47;background-color:#1F7A47;color:#FFFFFF;">
+          <i class="mgc_close_circle_line" style="font-size:22px;"></i>ไม่มี
+        </button>
+        <button id="v-car" onclick="pickVeh('car')" style="flex:1;padding:10px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;border:1.5px solid #D4D8D5;background-color:#FFFFFF;color:#4A5E52;">
+          <i class="mgc_car_line" style="font-size:22px;"></i>รถเก๋ง<span style="font-size:10px;font-weight:400;opacity:.7;">฿50</span>
+        </button>
+        <button id="v-moto" onclick="pickVeh('moto')" style="flex:1;padding:10px 4px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;border:1.5px solid #D4D8D5;background-color:#FFFFFF;color:#4A5E52;">
+          <i class="mgc_motorcycle_line" style="font-size:22px;"></i>รถจักรยานยนต์<span style="font-size:10px;font-weight:400;opacity:.7;">฿20</span>
+        </button>
+      </div>
+    </div>
+    <div style="background:#0D3320;border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+      <span style="font-size:14px;color:rgba(255,255,255,.7);">ยอดรวมทั้งหมด</span>
+      <strong id="total-disp" style="font-size:20px;font-weight:700;color:#FFFFFF;">฿200</strong>
+    </div>
+    <button class="btn-green" onclick="go('s-step2')">ถัดไป: กรอกข้อมูล →</button>
+    <div style="height:20px;"></div>
+  </div></div>
+</div>
+
+<!-- STEP 2 -->
+<div class="screen" id="s-step2">
+  <div style="height:44px;background:#0D3320;display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;"><span style="color:rgba(255,255,255,.85);font-size:12px;">9:41</span><span style="color:rgba(255,255,255,.85);font-size:12px;">●●●</span></div>
+  <div style="background:#1B5E38;padding:10px 16px 14px;flex-shrink:0;display:flex;align-items:center;gap:10px;">
+    <button onclick="go('s-step1')" style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);border:none;color:#FFFFFF;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;">←</button>
+    <span style="color:#FFFFFF;font-size:17px;font-weight:700;">ข้อมูลผู้เข้าชม</span>
+  </div>
+  <div id="steps2" style="display:flex;align-items:flex-start;padding:14px 20px 8px;background:#FFFFFF;border-bottom:1px solid #EAECEB;flex-shrink:0;"></div>
+  <div class="scroll-area"><div style="padding:16px;">
+
+    <!-- Person 1 -->
+    <div style="background:#FFFFFF;border:1px solid #EAECEB;border-radius:12px;margin-bottom:12px;overflow:hidden;">
+      <div style="padding:14px 14px 12px;">
+        <h5 style="font-size:13px;font-weight:700;color:#1B5E38;margin-bottom:12px;display:flex;align-items:center;gap:6px;">
+          <i class="mgc_user_3_line" style="font-size:16px;"></i>คนที่ 1 — ผู้ใหญ่ (ไทย)
+        </h5>
+        <!-- OCR Upload box -->
+        <div id="ocr-box-1" style="border:2px dashed #D4D8D5;border-radius:10px;padding:14px 12px;text-align:center;margin-bottom:14px;cursor:pointer;background:#F7F8F7;transition:all .2s;" onclick="triggerOcr(1)" onmouseover="this.style.borderColor='#1F7A47';this.style.background='#EEF8F3'" onmouseout="resetOcrBox(1)">
+          <div style="width:44px;height:44px;border-radius:10px;background:#EEF8F3;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;">
+            <i class="mgc_idcard_line" style="font-size:24px;color:#1F7A47;"></i>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#1A2920;margin-bottom:3px;">ถ่าย / อัปโหลดบัตรประชาชน</div>
+          <div style="font-size:11px;color:#8A9E92;">ระบบจะกรอกข้อมูลให้อัตโนมัติ</div>
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;">
+            <div style="display:flex;align-items:center;gap:4px;background:#FFFFFF;border:1px solid #D4D8D5;border-radius:20px;padding:5px 12px;font-size:11px;font-weight:600;color:#4A5E52;">
+              <i class="mgc_camera_line" style="font-size:14px;color:#1F7A47;"></i>ถ่ายภาพ
+            </div>
+            <div style="display:flex;align-items:center;gap:4px;background:#FFFFFF;border:1px solid #D4D8D5;border-radius:20px;padding:5px 12px;font-size:11px;font-weight:600;color:#4A5E52;">
+              <i class="mgc_upload_2_line" style="font-size:14px;color:#1F7A47;"></i>อัปโหลด
+            </div>
+          </div>
+        </div>
+        <!-- OCR loading state (hidden by default) -->
+        <div id="ocr-loading-1" style="display:none;border-radius:10px;background:#EEF8F3;border:1px solid #D6F0E2;padding:16px;text-align:center;margin-bottom:14px;">
+          <div id="ocr-spinner-1" style="width:36px;height:36px;border:3px solid #D6F0E2;border-top-color:#1F7A47;border-radius:50%;margin:0 auto 10px;animation:spin .8s linear infinite;"></div>
+          <div style="font-size:13px;font-weight:600;color:#1F7A47;">กำลังอ่านข้อมูลจากบัตร...</div>
+          <div style="font-size:11px;color:#8A9E92;margin-top:3px;">OCR กำลังประมวลผล</div>
+        </div>
+        <!-- OCR success badge (hidden by default) -->
+        <div id="ocr-done-1" style="display:none;background:#EEF8F3;border:1px solid #D6F0E2;border-radius:8px;padding:10px 12px;margin-bottom:14px;display:none;align-items:center;gap:8px;">
+          <i class="mgc_check_circle_fill" style="font-size:18px;color:#1F7A47;flex-shrink:0;"></i>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#1B5E38;">อ่านข้อมูลสำเร็จ</div>
+            <div style="font-size:11px;color:#4A5E52;">กรุณาตรวจสอบข้อมูลด้านล่างก่อนดำเนินการต่อ</div>
+          </div>
+          <button onclick="resetOcrState(1)" style="margin-left:auto;background:none;border:none;cursor:pointer;color:#8A9E92;font-size:18px;padding:0;line-height:1;">
+            <i class="mgc_close_line" style="font-size:16px;"></i>
+          </button>
+        </div>
+        <!-- Fields -->
+        <div style="margin-bottom:12px;"><label class="fld-label">ชื่อ-นามสกุล</label><input id="p1-name" type="text" value="สมชาย ใจดี"></div>
+        <div style="margin-bottom:12px;"><label class="fld-label">เลขบัตรประชาชน</label><input id="p1-id" type="text" value="1-2345-67890-12-3"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+          <div><label class="fld-label">วันเกิด</label><input id="p1-dob" type="text" value="15 ม.ค. 2535"></div>
+          <div><label class="fld-label">อายุ (ปี)</label><input id="p1-age" type="number" value="32"></div>
+        </div>
+        <div><label class="fld-label">เบอร์ติดต่อฉุกเฉิน</label><input id="p1-tel" type="tel" value="086-123-4567"></div>
+      </div>
+    </div>
+
+    <!-- Person 2 -->
+    <div style="background:#FFFFFF;border:1px solid #EAECEB;border-radius:12px;margin-bottom:14px;overflow:hidden;">
+      <div style="padding:14px 14px 12px;">
+        <h5 style="font-size:13px;font-weight:700;color:#1B5E38;margin-bottom:12px;display:flex;align-items:center;gap:6px;">
+          <i class="mgc_user_3_line" style="font-size:16px;"></i>คนที่ 2 — เด็ก (ไทย)
+        </h5>
+        <!-- OCR Upload box -->
+        <div id="ocr-box-2" style="border:2px dashed #D4D8D5;border-radius:10px;padding:14px 12px;text-align:center;margin-bottom:14px;cursor:pointer;background:#F7F8F7;transition:all .2s;" onclick="triggerOcr(2)" onmouseover="this.style.borderColor='#1F7A47';this.style.background='#EEF8F3'" onmouseout="resetOcrBox(2)">
+          <div style="width:44px;height:44px;border-radius:10px;background:#EEF8F3;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;">
+            <i class="mgc_idcard_line" style="font-size:24px;color:#1F7A47;"></i>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#1A2920;margin-bottom:3px;">ถ่าย / อัปโหลดบัตรประชาชน</div>
+          <div style="font-size:11px;color:#8A9E92;">ระบบจะกรอกข้อมูลให้อัตโนมัติ</div>
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;">
+            <div style="display:flex;align-items:center;gap:4px;background:#FFFFFF;border:1px solid #D4D8D5;border-radius:20px;padding:5px 12px;font-size:11px;font-weight:600;color:#4A5E52;">
+              <i class="mgc_camera_line" style="font-size:14px;color:#1F7A47;"></i>ถ่ายภาพ
+            </div>
+            <div style="display:flex;align-items:center;gap:4px;background:#FFFFFF;border:1px solid #D4D8D5;border-radius:20px;padding:5px 12px;font-size:11px;font-weight:600;color:#4A5E52;">
+              <i class="mgc_upload_2_line" style="font-size:14px;color:#1F7A47;"></i>อัปโหลด
+            </div>
+          </div>
+        </div>
+        <!-- OCR loading (hidden) -->
+        <div id="ocr-loading-2" style="display:none;border-radius:10px;background:#EEF8F3;border:1px solid #D6F0E2;padding:16px;text-align:center;margin-bottom:14px;">
+          <div style="width:36px;height:36px;border:3px solid #D6F0E2;border-top-color:#1F7A47;border-radius:50%;margin:0 auto 10px;animation:spin .8s linear infinite;"></div>
+          <div style="font-size:13px;font-weight:600;color:#1F7A47;">กำลังอ่านข้อมูลจากบัตร...</div>
+          <div style="font-size:11px;color:#8A9E92;margin-top:3px;">OCR กำลังประมวลผล</div>
+        </div>
+        <!-- OCR success (hidden) -->
+        <div id="ocr-done-2" style="display:none;background:#EEF8F3;border:1px solid #D6F0E2;border-radius:8px;padding:10px 12px;margin-bottom:14px;align-items:center;gap:8px;">
+          <i class="mgc_check_circle_fill" style="font-size:18px;color:#1F7A47;flex-shrink:0;"></i>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#1B5E38;">อ่านข้อมูลสำเร็จ</div>
+            <div style="font-size:11px;color:#4A5E52;">กรุณาตรวจสอบข้อมูลด้านล่างก่อนดำเนินการต่อ</div>
+          </div>
+          <button onclick="resetOcrState(2)" style="margin-left:auto;background:none;border:none;cursor:pointer;color:#8A9E92;font-size:18px;padding:0;line-height:1;">
+            <i class="mgc_close_line" style="font-size:16px;"></i>
+          </button>
+        </div>
+        <!-- Fields -->
+        <div style="margin-bottom:12px;"><label class="fld-label">ชื่อ-นามสกุล</label><input id="p2-name" type="text" placeholder="ชื่อ นามสกุล"></div>
+        <div style="margin-bottom:12px;"><label class="fld-label">เลขบัตรประชาชน</label><input id="p2-id" type="text" placeholder="x-xxxx-xxxxx-xx-x"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+          <div><label class="fld-label">วันเกิด</label><input id="p2-dob" type="text" placeholder="วว/ดด/ปปปป"></div>
+          <div><label class="fld-label">อายุ (ปี)</label><input id="p2-age" type="number" placeholder="อายุ"></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-green" onclick="go('s-step3')">ถัดไป: ชำระเงิน →</button>
+    <div style="height:20px;"></div>
+  </div></div>
+</div>
+
+<!-- STEP 3 -->
+<div class="screen" id="s-step3">
+  <div style="height:44px;background:#0D3320;display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;"><span style="color:rgba(255,255,255,.85);font-size:12px;">9:41</span><span style="color:rgba(255,255,255,.85);font-size:12px;">●●●</span></div>
+  <div style="background:#1B5E38;padding:10px 16px 14px;flex-shrink:0;display:flex;align-items:center;gap:10px;">
+    <button onclick="go('s-step2')" style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);border:none;color:#FFFFFF;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;">←</button>
+    <span style="color:#FFFFFF;font-size:17px;font-weight:700;">ชำระเงิน</span>
+  </div>
+  <div id="steps3" style="display:flex;align-items:flex-start;padding:14px 20px 8px;background:#FFFFFF;border-bottom:1px solid #EAECEB;flex-shrink:0;"></div>
+  <div class="scroll-area"><div style="padding:16px;">
+
+    <!-- Booking summary accordion -->
+    <div style="background:#FFFFFF;border:1px solid #EAECEB;border-radius:12px;margin-bottom:10px;overflow:hidden;">
+      <div onclick="toggleAccordion('acc-booking')" style="padding:13px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <i class="mgc_ticket_line" style="font-size:18px;color:#1F7A47;"></i>
+          <span style="font-size:14px;font-weight:700;color:#1A2920;">สรุปการจอง</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <strong id="total-disp3" style="font-size:15px;color:#1B5E38;">฿200</strong>
+          <i id="acc-booking-icon" class="mgc_down_line" style="font-size:18px;color:#8A9E92;transition:transform .2s;"></i>
+        </div>
+      </div>
+      <div id="acc-booking" style="display:none;border-top:1px solid #EAECEB;">
+        <div style="padding:0 14px 12px;">
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #EAECEB;">
+            <span style="font-size:13px;font-weight:600;color:#1A2920;">อุทยานแห่งชาติดอยอินทนนท์</span>
+          </div>
+          <div id="summary-rows"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visitor info accordion -->
+    <div style="background:#FFFFFF;border:1px solid #EAECEB;border-radius:12px;margin-bottom:10px;overflow:hidden;">
+      <div onclick="toggleAccordion('acc-visitors')" style="padding:13px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <i class="mgc_group_line" style="font-size:18px;color:#1F7A47;"></i>
+          <span style="font-size:14px;font-weight:700;color:#1A2920;">ข้อมูลผู้เข้าชม</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span style="font-size:12px;color:#8A9E92;">2 คน</span>
+          <i id="acc-visitors-icon" class="mgc_down_line" style="font-size:18px;color:#8A9E92;transition:transform .2s;"></i>
+        </div>
+      </div>
+      <div id="acc-visitors" style="display:none;border-top:1px solid #EAECEB;">
+        <div style="padding:10px 14px 14px;">
+          <!-- Visitor 1 -->
+          <div style="background:#F7F8F7;border-radius:10px;padding:12px;margin-bottom:8px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+              <div style="width:32px;height:32px;border-radius:50%;background:#D6F0E2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i class="mgc_user_3_line" style="font-size:16px;color:#1F7A47;"></i>
+              </div>
+              <div>
+                <div style="font-size:13px;font-weight:700;color:#1A2920;">สมชาย ใจดี</div>
+                <div style="font-size:11px;color:#8A9E92;">คนที่ 1 • ผู้ใหญ่ (ไทย)</div>
+              </div>
+              <span style="margin-left:auto;background:#D6F0E2;color:#1B5E38;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;">บัตรที่ 1</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+              <div style="background:#FFFFFF;border-radius:7px;padding:8px 10px;">
+                <div style="font-size:10px;color:#8A9E92;margin-bottom:2px;">เลขบัตรประชาชน</div>
+                <div style="font-size:12px;font-weight:600;color:#1A2920;">1-2345-67890-12-3</div>
+              </div>
+              <div style="background:#FFFFFF;border-radius:7px;padding:8px 10px;">
+                <div style="font-size:10px;color:#8A9E92;margin-bottom:2px;">วันเกิด</div>
+                <div style="font-size:12px;font-weight:600;color:#1A2920;">15 ม.ค. 2535</div>
+              </div>
+              <div style="background:#FFFFFF;border-radius:7px;padding:8px 10px;">
+                <div style="font-size:10px;color:#8A9E92;margin-bottom:2px;">อายุ</div>
+                <div style="font-size:12px;font-weight:600;color:#1A2920;">32 ปี</div>
+              </div>
+              <div style="background:#FFFFFF;border-radius:7px;padding:8px 10px;">
+                <div style="font-size:10px;color:#8A9E92;margin-bottom:2px;">เบอร์ฉุกเฉิน</div>
+                <div style="font-size:12px;font-weight:600;color:#1A2920;">086-123-4567</div>
+              </div>
+            </div>
+          </div>
+          <!-- Visitor 2 -->
+          <div style="background:#F7F8F7;border-radius:10px;padding:12px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+              <div style="width:32px;height:32px;border-radius:50%;background:#D6F0E2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i class="mgc_user_3_line" style="font-size:16px;color:#1F7A47;"></i>
+              </div>
+              <div>
+                <div style="font-size:13px;font-weight:700;color:#1A2920;">น้องมะลิ ใจดี</div>
+                <div style="font-size:11px;color:#8A9E92;">คนที่ 2 • เด็ก (ไทย)</div>
+              </div>
+              <span style="margin-left:auto;background:#D6F0E2;color:#1B5E38;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;">บัตรที่ 2</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+              <div style="background:#FFFFFF;border-radius:7px;padding:8px 10px;">
+                <div style="font-size:10px;color:#8A9E92;margin-bottom:2px;">เลขบัตรประชาชน</div>
+                <div style="font-size:12px;font-weight:600;color:#1A2920;">1-9876-54321-09-8</div>
+              </div>
+              <div style="background:#FFFFFF;border-radius:7px;padding:8px 10px;">
+                <div style="font-size:10px;color:#8A9E92;margin-bottom:2px;">วันเกิด</div>
+                <div style="font-size:12px;font-weight:600;color:#1A2920;">3 มี.ค. 2559</div>
+              </div>
+              <div style="background:#FFFFFF;border-radius:7px;padding:8px 10px;grid-column:1/-1;">
+                <div style="font-size:10px;color:#8A9E92;margin-bottom:2px;">อายุ</div>
+                <div style="font-size:12px;font-weight:600;color:#1A2920;">8 ปี</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment methods -->
+    <p style="font-size:12px;font-weight:700;color:#4A5E52;letter-spacing:.05em;margin-bottom:10px;">วิธีชำระเงิน</p>
+    <div id="pay-options"></div>
+    <div style="height:12px;"></div>
+    <button id="pay-btn" class="btn-green" onclick="go('s-purchased')">ชำระเงิน ฿200</button>
+    <div style="height:20px;"></div>
+  </div></div>
+</div>
+
+<!-- PURCHASED -->
+<div class="screen" id="s-purchased">
+  <div style="height:44px;background:#0D3320;display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;"><span style="color:rgba(255,255,255,.85);font-size:12px;">9:41</span><span style="color:rgba(255,255,255,.85);font-size:12px;">●●●</span></div>
+  <div style="background:#1B5E38;padding:20px 16px 16px;text-align:center;flex-shrink:0;">
+    <div style="width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;">
+      <i class="mgc_check_circle_line" style="font-size:32px;color:#FFFFFF;"></i>
+    </div>
+    <h2 style="color:#FFFFFF;font-size:20px;font-weight:700;margin-bottom:4px;">ชำระเงินสำเร็จ!</h2>
+    <p style="color:rgba(255,255,255,.65);font-size:13px;">E-Ticket ถูกส่งไปยังอีเมลของคุณแล้ว</p>
+  </div>
+  <div class="scroll-area">
+    <div style="margin:14px 16px 12px;background:#0D3320;border-radius:14px;overflow:hidden;">
+      <div style="padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;">
+        <h3 style="color:#FFFFFF;font-size:14px;font-weight:700;">อุทยานแห่งชาติดอยอินทนนท์</h3>
+        <span style="background:rgba(255,255,255,.15);color:#FFFFFF;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;">ใช้ได้ครั้งเดียว</span>
+      </div>
+      <div style="padding:16px 18px;">
+        <div style="width:110px;height:110px;background:#FFFFFF;border-radius:8px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
+          <i class="mgc_qrcode_line" style="font-size:64px;color:#0D3320;"></i>
+        </div>
+        <div style="color:rgba(255,255,255,.45);font-size:11px;text-align:center;letter-spacing:2px;margin-bottom:12px;">TKT-2025-DOI-001234</div>
+        <div id="tkt-info-rows"></div>
+      </div>
+    </div>
+    <div style="padding:0 16px 16px;">
+      <p style="font-size:12px;font-weight:700;color:#4A5E52;letter-spacing:.05em;margin-bottom:10px;">ข้อมูลผู้เข้าชม</p>
+      <div style="background:#FFFFFF;border:1px solid #EAECEB;border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;">
+        <div style="width:38px;height:38px;border-radius:50%;background:#D6F0E2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="mgc_user_3_line" style="font-size:20px;color:#1F7A47;"></i>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:#1A2920;">สมชาย ใจดี</div>
+          <div style="font-size:11px;color:#8A9E92;">ผู้ใหญ่ (ไทย) • อายุ 32 ปี</div>
+          <div style="font-size:11px;color:#8A9E92;">บัตรประชาชน: 1-2345-67890-12-3</div>
+        </div>
+        <span style="margin-left:auto;background:#D6F0E2;color:#1B5E38;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;">บัตรที่ 1</span>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #EAECEB;border-radius:10px;padding:12px 14px;margin-bottom:16px;display:flex;align-items:center;gap:12px;">
+        <div style="width:38px;height:38px;border-radius:50%;background:#D6F0E2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="mgc_user_3_line" style="font-size:20px;color:#1F7A47;"></i>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:#1A2920;">น้องมะลิ ใจดี</div>
+          <div style="font-size:11px;color:#8A9E92;">เด็ก (ไทย) • อายุ 8 ปี</div>
+          <div style="font-size:11px;color:#8A9E92;">บัตรประชาชน: 1-9876-54321-09-8</div>
+        </div>
+        <span style="margin-left:auto;background:#D6F0E2;color:#1B5E38;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;">บัตรที่ 2</span>
+      </div>
+      <button class="btn-green" onclick="go('s-home')"><i class="mgc_home_3_line" style="font-size:18px;"></i>กลับหน้าหลัก</button>
+      <div style="height:24px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAP SCREEN ===== -->
+<div class="screen" id="s-map">
+  <div style="height:44px;background:#0D3320;display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;"><span style="color:rgba(255,255,255,.85);font-size:12px;">9:41</span><span style="color:rgba(255,255,255,.85);font-size:12px;">●●●</span></div>
+  <div style="background:#1B5E38;padding:10px 16px 14px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;">
+    <span style="color:#FFFFFF;font-size:17px;font-weight:700;">แผนที่อุทยานแห่งชาติ</span>
+    <div style="background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;gap:6px;padding:6px 12px;">
+      <i class="mgc_search_line" style="font-size:15px;color:rgba(255,255,255,.7);"></i>
+      <span style="font-size:12px;color:rgba(255,255,255,.7);">ค้นหา...</span>
+    </div>
+  </div>
+  <!-- Mock Map -->
+  <div style="flex:1;position:relative;overflow:hidden;background:#E8F0E9;">
+    <!-- SVG Thailand rough map outline -->
+    <svg viewBox="0 0 375 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;top:0;left:0;">
+      <!-- Map background -->
+      <rect width="375" height="460" fill="#D4E8DA"/>
+      <!-- Sea / water -->
+      <ellipse cx="280" cy="350" rx="120" ry="80" fill="#B8D4E8" opacity=".6"/>
+      <ellipse cx="60" cy="380" rx="80" ry="60" fill="#B8D4E8" opacity=".5"/>
+      <!-- Thailand rough shape -->
+      <path d="M160,20 L200,18 L230,30 L245,55 L240,80 L255,110 L260,140 L250,165 L265,185 L270,210 L260,235 L268,260 L262,285 L255,305 L248,330 L238,350 L228,365 L215,378 L205,385 L198,370 L192,355 L185,345 L178,360 L170,372 L160,380 L152,368 L148,350 L155,335 L148,310 L140,285 L135,260 L138,235 L128,210 L120,185 L125,160 L115,135 L118,105 L125,80 L130,55 L145,35 Z" fill="#C8DFC8" stroke="#A0BFA0" stroke-width="1.5"/>
+      <!-- Roads -->
+      <line x1="180" y1="60" x2="190" y2="360" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="4,3" opacity=".6"/>
+      <line x1="130" y1="180" x2="260" y2="200" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="3,3" opacity=".5"/>
+      <!-- Grid lines subtle -->
+      <line x1="0" y1="150" x2="375" y2="150" stroke="#B0C8B0" stroke-width=".5" opacity=".4"/>
+      <line x1="0" y1="300" x2="375" y2="300" stroke="#B0C8B0" stroke-width=".5" opacity=".4"/>
+      <line x1="120" y1="0" x2="120" y2="460" stroke="#B0C8B0" stroke-width=".5" opacity=".4"/>
+      <line x1="250" y1="0" x2="250" y2="460" stroke="#B0C8B0" stroke-width=".5" opacity=".4"/>
+    </svg>
+    <!-- Park pins -->
+    <div id="map-pins"></div>
+    <!-- Selected park popup -->
+    <div id="map-popup" style="display:none;position:absolute;bottom:90px;left:50%;transform:translateX(-50%);width:290px;background:#FFFFFF;border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.18);overflow:hidden;z-index:20;">
+      <div style="height:90px;position:relative;overflow:hidden;">
+        <img id="popup-img" src="" style="width:100%;height:100%;object-fit:cover;" alt="">
+        <button onclick="closePopup()" style="position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.4);border:none;color:#FFFFFF;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;"><i class="mgc_close_line"></i></button>
+      </div>
+      <div style="padding:12px 14px;">
+        <div style="font-size:14px;font-weight:700;color:#1A2920;margin-bottom:2px;" id="popup-name"></div>
+        <div style="font-size:12px;color:#8A9E92;margin-bottom:8px;" id="popup-loc"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="display:flex;gap:12px;">
+            <span style="font-size:12px;color:#4A5E52;display:flex;align-items:center;gap:3px;"><i class="mgc_star_fill" style="font-size:13px;color:#F4A400;"></i><span id="popup-rate"></span></span>
+            <span style="font-size:12px;color:#4A5E52;display:flex;align-items:center;gap:3px;"><i class="mgc_ticket_line" style="font-size:13px;color:#1F7A47;"></i><span id="popup-price"></span></span>
+          </div>
+          <button onclick="go('s-park')" style="height:32px;padding:0 14px;background-color:#1F7A47;color:#FFFFFF;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">ดูรายละเอียด</button>
+        </div>
+      </div>
+    </div>
+    <!-- Region filter -->
+    <div style="position:absolute;top:12px;left:12px;right:12px;display:flex;gap:6px;overflow-x:auto;z-index:10;">
+      <button style="height:28px;padding:0 12px;border-radius:20px;background-color:#1F7A47;color:#FFFFFF;border:none;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.15);">ทั้งหมด</button>
+      <button style="height:28px;padding:0 12px;border-radius:20px;background-color:#FFFFFF;color:#4A5E52;border:none;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.12);">ภาคเหนือ</button>
+      <button style="height:28px;padding:0 12px;border-radius:20px;background-color:#FFFFFF;color:#4A5E52;border:none;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.12);">ภาคกลาง</button>
+      <button style="height:28px;padding:0 12px;border-radius:20px;background-color:#FFFFFF;color:#4A5E52;border:none;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.12);">ภาคใต้</button>
+      <button style="height:28px;padding:0 12px;border-radius:20px;background-color:#FFFFFF;color:#4A5E52;border:none;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.12);">ภาคตะวันออก</button>
+    </div>
+    <!-- Park count badge -->
+    <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(27,79,42,.9);color:#FFFFFF;font-size:12px;font-weight:600;padding:6px 16px;border-radius:20px;backdrop-filter:blur(4px);white-space:nowrap;">อุทยานแห่งชาติ 7 แห่ง</div>
+  </div>
+  <div style="height:66px;background:#FFFFFF;border-top:1px solid #EAECEB;display:flex;align-items:center;justify-content:space-around;flex-shrink:0;">
+    <div onclick="go('s-home')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_home_3_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">หน้าหลัก</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_map_line" style="font-size:22px;color:#1F7A47;"></i><span style="font-size:10px;color:#1F7A47;font-weight:700;">แผนที่</span></div>
+    <div onclick="go('s-tickets')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_ticket_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">บัตรของฉัน</span></div>
+    <div onclick="go('s-notif')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;position:relative;"><i class="mgc_notification_line" style="font-size:22px;color:#8A9E92;"></i><span style="position:absolute;top:6px;right:8px;width:8px;height:8px;background:#E53E3E;border-radius:50%;border:1.5px solid #FFFFFF;"></span><span style="font-size:10px;color:#8A9E92;">แจ้งเตือน</span></div>
+    <div onclick="go('s-profile')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_user_3_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">โปรไฟล์</span></div>
+  </div>
+</div>
+
+<!-- ===== MY TICKETS SCREEN ===== -->
+<div class="screen" id="s-tickets">
+  <div style="height:44px;background:#0D3320;display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;"><span style="color:rgba(255,255,255,.85);font-size:12px;">9:41</span><span style="color:rgba(255,255,255,.85);font-size:12px;">●●●</span></div>
+  <div style="background:#1B5E38;padding:10px 16px 14px;flex-shrink:0;">
+    <div style="color:#FFFFFF;font-size:17px;font-weight:700;margin-bottom:12px;">บัตรของฉัน</div>
+    <div style="display:flex;gap:6px;">
+      <button id="tft-active" onclick="filterTickets('active')" style="flex:1;height:32px;border-radius:20px;background-color:rgba(255,255,255,.25);color:#FFFFFF;border:none;font-size:12px;font-weight:700;cursor:pointer;">พร้อมใช้ (2)</button>
+      <button id="tft-used" onclick="filterTickets('used')" style="flex:1;height:32px;border-radius:20px;background-color:rgba(255,255,255,.1);color:rgba(255,255,255,.65);border:none;font-size:12px;font-weight:600;cursor:pointer;">ใช้แล้ว (3)</button>
+      <button id="tft-cancel" onclick="filterTickets('cancel')" style="flex:1;height:32px;border-radius:20px;background-color:rgba(255,255,255,.1);color:rgba(255,255,255,.65);border:none;font-size:12px;font-weight:600;cursor:pointer;">ยกเลิก (1)</button>
+    </div>
+  </div>
+  <div class="scroll-area"><div id="ticket-list" style="padding:14px 16px;"></div></div>
+  <div style="height:66px;background:#FFFFFF;border-top:1px solid #EAECEB;display:flex;align-items:center;justify-content:space-around;flex-shrink:0;">
+    <div onclick="go('s-home')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_home_3_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">หน้าหลัก</span></div>
+    <div onclick="go('s-map')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_map_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">แผนที่</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_ticket_line" style="font-size:22px;color:#1F7A47;"></i><span style="font-size:10px;color:#1F7A47;font-weight:700;">บัตรของฉัน</span></div>
+    <div onclick="go('s-notif')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;position:relative;"><i class="mgc_notification_line" style="font-size:22px;color:#8A9E92;"></i><span style="position:absolute;top:6px;right:8px;width:8px;height:8px;background:#E53E3E;border-radius:50%;border:1.5px solid #FFFFFF;"></span><span style="font-size:10px;color:#8A9E92;">แจ้งเตือน</span></div>
+    <div onclick="go('s-profile')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_user_3_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">โปรไฟล์</span></div>
+  </div>
+</div>
+
+<!-- ===== NOTIFICATION SCREEN ===== -->
+<div class="screen" id="s-notif">
+  <div style="height:44px;background:#0D3320;display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;"><span style="color:rgba(255,255,255,.85);font-size:12px;">9:41</span><span style="color:rgba(255,255,255,.85);font-size:12px;">●●●</span></div>
+  <div style="background:#1B5E38;padding:10px 16px 14px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;">
+    <span style="color:#FFFFFF;font-size:17px;font-weight:700;">การแจ้งเตือน</span>
+    <button style="background:rgba(255,255,255,.15);border:none;color:#FFFFFF;font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;cursor:pointer;">อ่านทั้งหมด</button>
+  </div>
+  <div class="scroll-area"><div style="padding:0;">
+    <!-- Unread group -->
+    <div style="padding:10px 16px 4px;"><span style="font-size:11px;font-weight:700;color:#8A9E92;letter-spacing:.05em;">ใหม่</span></div>
+    <!-- Notif 1: Purchase success (unread) -->
+    <div style="display:flex;gap:12px;padding:14px 16px;background:#EEF8F3;border-bottom:1px solid #EAECEB;cursor:pointer;" onclick="go('s-purchased')">
+      <div style="width:44px;height:44px;border-radius:12px;background:#D6F0E2;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="mgc_check_circle_fill" style="font-size:24px;color:#1F7A47;"></i></div>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;color:#1A2920;margin-bottom:2px;">ชำระเงินสำเร็จ</div>
+        <div style="font-size:12px;color:#4A5E52;line-height:1.5;">บัตรเข้าชม ดอยอินทนนท์ วันที่ 20 พ.ค. 68 รอบเช้า ได้รับการยืนยันแล้ว</div>
+        <div style="font-size:11px;color:#8A9E92;margin-top:4px;">5 นาทีที่แล้ว</div>
+      </div>
+      <div style="width:8px;height:8px;background:#1F7A47;border-radius:50%;flex-shrink:0;margin-top:6px;"></div>
+    </div>
+    <!-- Notif 2: Check-in reminder (unread) -->
+    <div style="display:flex;gap:12px;padding:14px 16px;background:#EEF8F3;border-bottom:1px solid #EAECEB;cursor:pointer;">
+      <div style="width:44px;height:44px;border-radius:12px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="mgc_alarm_2_line" style="font-size:24px;color:#D97706;"></i></div>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;color:#1A2920;margin-bottom:2px;">เตือนก่อนเข้าชม 1 วัน</div>
+        <div style="font-size:12px;color:#4A5E52;line-height:1.5;">คุณมีการจองที่ ดอยอินทนนท์ พรุ่งนี้ (20 พ.ค.) อย่าลืมนำบัตรประชาชนมาด้วย</div>
+        <div style="font-size:11px;color:#8A9E92;margin-top:4px;">2 ชั่วโมงที่แล้ว</div>
+      </div>
+      <div style="width:8px;height:8px;background:#1F7A47;border-radius:50%;flex-shrink:0;margin-top:6px;"></div>
+    </div>
+    <!-- Read group -->
+    <div style="padding:12px 16px 4px;"><span style="font-size:11px;font-weight:700;color:#8A9E92;letter-spacing:.05em;">ก่อนหน้า</span></div>
+    <!-- Notif 3: Check-out -->
+    <div style="display:flex;gap:12px;padding:14px 16px;background:#FFFFFF;border-bottom:1px solid #EAECEB;cursor:pointer;">
+      <div style="width:44px;height:44px;border-radius:12px;background:#F7F8F7;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="mgc_exit_line" style="font-size:24px;color:#8A9E92;"></i></div>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;color:#1A2920;margin-bottom:2px;">Check-out สำเร็จ</div>
+        <div style="font-size:12px;color:#4A5E52;line-height:1.5;">คุณออกจากอุทยานแห่งชาติเขาใหญ่เรียบร้อยแล้ว ขอบคุณที่มาเยี่ยมชม</div>
+        <div style="font-size:11px;color:#8A9E92;margin-top:4px;">เมื่อวาน 15:32</div>
+      </div>
+    </div>
+    <!-- Notif 4: Review reminder -->
+    <div style="display:flex;gap:12px;padding:14px 16px;background:#FFFFFF;border-bottom:1px solid #EAECEB;cursor:pointer;">
+      <div style="width:44px;height:44px;border-radius:12px;background:#F7F8F7;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="mgc_star_line" style="font-size:24px;color:#8A9E92;"></i></div>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;color:#1A2920;margin-bottom:2px;">รีวิวประสบการณ์ของคุณ</div>
+        <div style="font-size:12px;color:#4A5E52;line-height:1.5;">คุณไปเยือน เขาใหญ่ เมื่อ 3 วันก่อน แบ่งปันประสบการณ์ให้ผู้อื่นได้เลย</div>
+        <div style="font-size:11px;color:#8A9E92;margin-top:4px;">3 วันที่แล้ว</div>
+      </div>
+    </div>
+    <!-- Notif 5: Check-in -->
+    <div style="display:flex;gap:12px;padding:14px 16px;background:#FFFFFF;border-bottom:1px solid #EAECEB;cursor:pointer;">
+      <div style="width:44px;height:44px;border-radius:12px;background:#F7F8F7;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="mgc_entrance_line" style="font-size:24px;color:#8A9E92;"></i></div>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;color:#1A2920;margin-bottom:2px;">Check-in สำเร็จ</div>
+        <div style="font-size:12px;color:#4A5E52;line-height:1.5;">ยินดีต้อนรับสู่อุทยานแห่งชาติเขาใหญ่ สนุกกับการท่องเที่ยวนะคะ</div>
+        <div style="font-size:11px;color:#8A9E92;margin-top:4px;">3 วันที่แล้ว</div>
+      </div>
+    </div>
+    <!-- Notif 6: News -->
+    <div style="display:flex;gap:12px;padding:14px 16px;background:#FFFFFF;border-bottom:1px solid #EAECEB;cursor:pointer;">
+      <div style="width:44px;height:44px;border-radius:12px;background:#F7F8F7;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="mgc_news_line" style="font-size:24px;color:#8A9E92;"></i></div>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;color:#1A2920;margin-bottom:2px;">ข่าวสาร: เปิดรับจองออนไลน์แล้ว</div>
+        <div style="font-size:12px;color:#4A5E52;line-height:1.5;">อุทยานแห่งชาติหมู่เกาะสุรินทร์เปิดรับนักท่องเที่ยวอีกครั้ง ตั้งแต่ 1 มิ.ย. 68</div>
+        <div style="font-size:11px;color:#8A9E92;margin-top:4px;">5 วันที่แล้ว</div>
+      </div>
+    </div>
+    <!-- Notif 7: Refund -->
+    <div style="display:flex;gap:12px;padding:14px 16px;background:#FFFFFF;border-bottom:1px solid #EAECEB;cursor:pointer;">
+      <div style="width:44px;height:44px;border-radius:12px;background:#FFF0F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="mgc_refund_cny_line" style="font-size:24px;color:#E53E3E;"></i></div>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;color:#1A2920;margin-bottom:2px;">คืนเงินสำเร็จ</div>
+        <div style="font-size:12px;color:#4A5E52;line-height:1.5;">คืนเงิน ฿400 จากการยกเลิกบัตรเข้าชมหมู่เกาะสุรินทร์ เข้าบัญชีแล้ว</div>
+        <div style="font-size:11px;color:#8A9E92;margin-top:4px;">2 สัปดาห์ที่แล้ว</div>
+      </div>
+    </div>
+    <div style="height:16px;"></div>
+  </div></div>
+  <div style="height:66px;background:#FFFFFF;border-top:1px solid #EAECEB;display:flex;align-items:center;justify-content:space-around;flex-shrink:0;">
+    <div onclick="go('s-home')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_home_3_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">หน้าหลัก</span></div>
+    <div onclick="go('s-map')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_map_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">แผนที่</span></div>
+    <div onclick="go('s-tickets')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_ticket_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">บัตรของฉัน</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_notification_line" style="font-size:22px;color:#1F7A47;"></i><span style="font-size:10px;color:#1F7A47;font-weight:700;">แจ้งเตือน</span></div>
+    <div onclick="go('s-profile')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_user_3_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">โปรไฟล์</span></div>
+  </div>
+</div>
+
+<!-- ===== PROFILE SCREEN ===== -->
+<div class="screen" id="s-profile">
+  <div style="height:44px;background:#0D3320;display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;"><span style="color:rgba(255,255,255,.85);font-size:12px;">9:41</span><span style="color:rgba(255,255,255,.85);font-size:12px;">●●●</span></div>
+  <div style="background:linear-gradient(160deg,#0D3320,#1F7A47);padding:24px 20px 28px;flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <div style="width:68px;height:68px;border-radius:50%;background:#FFFFFF;border:3px solid rgba(255,255,255,.3);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+        <i class="mgc_user_3_fill" style="font-size:42px;color:#C8DFC8;"></i>
+      </div>
+      <div>
+        <div style="font-size:18px;font-weight:700;color:#FFFFFF;">สมชาย ใจดี</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.7);margin-top:2px;">somchai.j@email.com</div>
+        <div style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.15);border-radius:20px;padding:4px 10px;margin-top:6px;">
+          <i class="mgc_shield_check_line" style="font-size:12px;color:#FFFFFF;"></i>
+          <span style="font-size:11px;color:#FFFFFF;font-weight:600;">ยืนยันตัวตนแล้ว</span>
+        </div>
+      </div>
+    </div>
+    <!-- Stats -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:20px;">
+      <div style="background:rgba(255,255,255,.12);border-radius:10px;padding:10px 8px;text-align:center;">
+        <div style="font-size:20px;font-weight:700;color:#FFFFFF;">8</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:2px;">ทริปทั้งหมด</div>
+      </div>
+      <div style="background:rgba(255,255,255,.12);border-radius:10px;padding:10px 8px;text-align:center;">
+        <div style="font-size:20px;font-weight:700;color:#FFFFFF;">12</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:2px;">รีวิวแล้ว</div>
+      </div>
+      <div style="background:rgba(255,255,255,.12);border-radius:10px;padding:10px 8px;text-align:center;">
+        <div style="font-size:20px;font-weight:700;color:#FFFFFF;">5</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:2px;">อุทยานที่เยือน</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-area"><div style="padding:16px;">
+    <!-- Account actions -->
+    <p style="font-size:11px;font-weight:700;color:#8A9E92;letter-spacing:.05em;margin-bottom:10px;">บัญชีของฉัน</p>
+    <div style="background:#FFFFFF;border-radius:12px;border:1px solid #EAECEB;overflow:hidden;margin-bottom:14px;">
+      <div onclick="" style="display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid #EAECEB;cursor:pointer;">
+        <div style="width:36px;height:36px;border-radius:9px;background:#EEF8F3;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="mgc_edit_2_line" style="font-size:18px;color:#1F7A47;"></i></div>
+        <span style="font-size:14px;font-weight:600;color:#1A2920;flex:1;">แก้ไขโปรไฟล์</span>
+        <i class="mgc_right_line" style="font-size:16px;color:#8A9E92;"></i>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid #EAECEB;cursor:pointer;">
+        <div style="width:36px;height:36px;border-radius:9px;background:#EEF8F3;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="mgc_settings_3_line" style="font-size:18px;color:#1F7A47;"></i></div>
+        <span style="font-size:14px;font-weight:600;color:#1A2920;flex:1;">การตั้งค่า</span>
+        <i class="mgc_right_line" style="font-size:16px;color:#8A9E92;"></i>
+      </div>
+      <div onclick="go('s-notif')" style="display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;">
+        <div style="width:36px;height:36px;border-radius:9px;background:#EEF8F3;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="mgc_notification_line" style="font-size:18px;color:#1F7A47;"></i></div>
+        <span style="font-size:14px;font-weight:600;color:#1A2920;flex:1;">การแจ้งเตือน</span>
+        <div style="display:flex;align-items:center;gap:6px;"><span style="font-size:11px;font-weight:700;background:#E53E3E;color:#FFFFFF;padding:2px 7px;border-radius:20px;">2</span><i class="mgc_right_line" style="font-size:16px;color:#8A9E92;"></i></div>
+      </div>
+    </div>
+    <!-- Preferences -->
+    <p style="font-size:11px;font-weight:700;color:#8A9E92;letter-spacing:.05em;margin-bottom:10px;">การตั้งค่าทั่วไป</p>
+    <div style="background:#FFFFFF;border-radius:12px;border:1px solid #EAECEB;overflow:hidden;margin-bottom:14px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid #EAECEB;cursor:pointer;">
+        <div style="width:36px;height:36px;border-radius:9px;background:#F7F8F7;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="mgc_translate_2_line" style="font-size:18px;color:#4A5E52;"></i></div>
+        <span style="font-size:14px;font-weight:600;color:#1A2920;flex:1;">ภาษา</span>
+        <div style="display:flex;align-items:center;gap:4px;"><span style="font-size:13px;color:#8A9E92;">ไทย</span><i class="mgc_right_line" style="font-size:16px;color:#8A9E92;"></i></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;">
+        <div style="width:36px;height:36px;border-radius:9px;background:#F7F8F7;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="mgc_book_2_line" style="font-size:18px;color:#4A5E52;"></i></div>
+        <span style="font-size:14px;font-weight:600;color:#1A2920;flex:1;">คู่มือการใช้งาน</span>
+        <i class="mgc_right_line" style="font-size:16px;color:#8A9E92;"></i>
+      </div>
+    </div>
+    <!-- Logout -->
+    <div style="background:#FFFFFF;border-radius:12px;border:1px solid #EAECEB;overflow:hidden;margin-bottom:24px;">
+      <div onclick="go('s-login')" style="display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;">
+        <div style="width:36px;height:36px;border-radius:9px;background:#FFF0F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="mgc_exit_line" style="font-size:18px;color:#E53E3E;"></i></div>
+        <span style="font-size:14px;font-weight:600;color:#E53E3E;flex:1;">ออกจากระบบ</span>
+        <i class="mgc_right_line" style="font-size:16px;color:#8A9E92;"></i>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:11px;color:#8A9E92;">เวอร์ชัน 1.0.0 • ระบบจองบัตรอุทยานแห่งชาติ</p>
+    <div style="height:8px;"></div>
+  </div></div>
+  <div style="height:66px;background:#FFFFFF;border-top:1px solid #EAECEB;display:flex;align-items:center;justify-content:space-around;flex-shrink:0;">
+    <div onclick="go('s-home')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_home_3_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">หน้าหลัก</span></div>
+    <div onclick="go('s-map')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_map_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">แผนที่</span></div>
+    <div onclick="go('s-tickets')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_ticket_line" style="font-size:22px;color:#8A9E92;"></i><span style="font-size:10px;color:#8A9E92;">บัตรของฉัน</span></div>
+    <div onclick="go('s-notif')" style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;position:relative;"><i class="mgc_notification_line" style="font-size:22px;color:#8A9E92;"></i><span style="position:absolute;top:6px;right:8px;width:8px;height:8px;background:#E53E3E;border-radius:50%;border:1.5px solid #FFFFFF;"></span><span style="font-size:10px;color:#8A9E92;">แจ้งเตือน</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 10px;"><i class="mgc_user_3_line" style="font-size:22px;color:#1F7A47;"></i><span style="font-size:10px;color:#1F7A47;font-weight:700;">โปรไฟล์</span></div>
+  </div>
+</div>
+
+</div><!-- /phone-wrap -->
+
+<script>
+var qty={adult:1,child:1,foreign:0};
+var prices={adult:200,child:100,foreign:400};
+var veh='none';
+var vehP={none:0,car:50,moto:20};
+var selPay=0;
+var selRound='morning';
+var selDate=0;
+
+var PARKS=[
+  {name:'อุทยานแห่งชาติดอยอินทนนท์',loc:'เชียงใหม่',price:'เริ่ม ฿200',hours:'06:00–18:00',rate:'4.8',img:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=75'},
+  {name:'อุทยานแห่งชาติหมู่เกาะสุรินทร์',loc:'พังงา',price:'เริ่ม ฿400',hours:'08:00–17:00',rate:'4.9',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=75'},
+  {name:'อุทยานแห่งชาติเขาใหญ่',loc:'นครราชสีมา',price:'เริ่ม ฿400',hours:'06:00–18:00',rate:'4.7',img:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=75'}
+];
+
+var TH_D=['อา','จ','อ','พ','พฤ','ศ','ส'];
+var TH_M=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+
+function go(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  var t=document.getElementById(id);
+  if(t){
+    t.classList.add('active');
+    var c=t.querySelector('.scroll-area');
+    if(c) c.scrollTop=0;
+  }
+  if(id==='s-home') buildParkCards();
+  if(id==='s-step1'){buildDates();buildQtyRows();buildSteps('steps1',1);}
+  if(id==='s-step2') buildSteps('steps2',2);
+  if(id==='s-step3'){buildSteps('steps3',3);buildSummary();buildPayOptions();}
+  if(id==='s-purchased') buildTicketInfo();
+  if(id==='s-map') buildMapPins();
+  if(id==='s-tickets') filterTickets('active');
+  updateTotal();
+}
+
+function getTotal(){
+  var t=0;
+  Object.keys(qty).forEach(function(k){t+=qty[k]*prices[k];});
+  t+=vehP[veh];
+  return t;
+}
+
+function updateTotal(){
+  var t=getTotal();
+  var d=document.getElementById('total-disp');
+  if(d) d.textContent='฿'+t.toLocaleString();
+  var d3=document.getElementById('total-disp3');
+  if(d3) d3.textContent='฿'+t.toLocaleString();
+  var pb=document.getElementById('pay-btn');
+  if(pb) pb.textContent='ชำระเงิน ฿'+t.toLocaleString();
+}
+
+function buildParkCards(){
+  var el=document.getElementById('park-cards');
+  if(!el||el.children.length>0) return;
+  PARKS.forEach(function(p){
+    var d=document.createElement('div');
+    d.style.cssText='cursor:pointer;border-radius:14px;overflow:hidden;background:#FFFFFF;border:1px solid #EAECEB;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.07);';
+    d.onclick=function(){go('s-park');};
+    d.innerHTML='<div style="height:148px;position:relative;overflow:hidden;"><img src="'+p.img+'" style="width:100%;height:100%;object-fit:cover;" alt="'+p.name+'"><div style="position:absolute;top:10px;right:10px;background:rgba(0,0,0,.5);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:3px;"><i class="mgc_star_fill" style="font-size:12px;color:#F4A400;"></i> '+p.rate+'</div></div><div style="padding:12px 14px;"><h4 style="font-size:15px;font-weight:700;color:#1A2920;margin-bottom:3px;">'+p.name+'</h4><p style="font-size:12px;color:#8A9E92;">'+p.loc+' • '+p.price+'</p><div style="display:flex;gap:14px;margin-top:8px;"><span style="font-size:12px;color:#8A9E92;display:flex;align-items:center;gap:4px;"><i class="mgc_ticket_line" style="font-size:14px;color:#1F7A47;"></i>'+p.price+'</span><span style="font-size:12px;color:#8A9E92;display:flex;align-items:center;gap:4px;"><i class="mgc_time_line" style="font-size:14px;color:#1F7A47;"></i>'+p.hours+'</span></div></div>';
+    el.appendChild(d);
+  });
+}
+
+function buildSteps(elId, active){
+  var el=document.getElementById(elId);
+  if(!el) return;
+  el.innerHTML='';
+  var labels=['วันและบัตร','ข้อมูล','ชำระเงิน'];
+  for(var i=1;i<=3;i++){
+    var sw=document.createElement('div');
+    sw.style.cssText='display:flex;flex-direction:column;align-items:center;gap:2px;';
+    var dot=document.createElement('div');
+    var isDone=i<active, isNow=i===active;
+    dot.style.cssText='width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;'+(isDone?'background-color:#1F7A47;color:#FFFFFF;':(isNow?'background-color:#1F7A47;color:#FFFFFF;box-shadow:0 0 0 4px #D6F0E2;':'background-color:#EAECEB;color:#8A9E92;'));
+    dot.textContent=isDone?'✓':i;
+    var lbl=document.createElement('span');
+    lbl.style.cssText='font-size:10px;color:#8A9E92;';
+    lbl.textContent=labels[i-1];
+    sw.appendChild(dot);sw.appendChild(lbl);el.appendChild(sw);
+    if(i<3){
+      var line=document.createElement('div');
+      line.style.cssText='flex:1;height:2px;margin-top:13px;'+(i<active?'background-color:#1F7A47;':'background-color:#EAECEB;');
+      el.appendChild(line);
+    }
+  }
+}
+
+function buildDates(){
+  var el=document.getElementById('date-chips');
+  if(!el||el.children.length>0) return;
+  var now=new Date();
+  for(var i=0;i<7;i++){
+    (function(idx){
+      var d=new Date(now);d.setDate(now.getDate()+idx);
+      var chip=document.createElement('div');
+      chip.style.cssText='min-width:50px;padding:7px 5px;border-radius:8px;text-align:center;cursor:pointer;flex-shrink:0;'+(idx===0?'background-color:#1F7A47;border:1.5px solid #1F7A47;':'background-color:#FFFFFF;border:1.5px solid #D4D8D5;');
+      chip.innerHTML='<span style="font-size:10px;font-weight:600;display:block;'+(idx===0?'color:#FFFFFF;':'color:#8A9E92;')+'">'+TH_D[d.getDay()]+'</span><span style="font-size:17px;font-weight:700;display:block;'+(idx===0?'color:#FFFFFF;':'color:#1A2920;')+'">'+d.getDate()+'</span><span style="font-size:10px;display:block;'+(idx===0?'color:#FFFFFF;':'color:#8A9E92;')+'">'+TH_M[d.getMonth()]+'</span>';
+      chip.onclick=function(){
+        selDate=idx;
+        document.querySelectorAll('#date-chips > div').forEach(function(c,ci){
+          var on=ci===idx;
+          c.style.backgroundColor=on?'#1F7A47':'#FFFFFF';
+          c.style.borderColor=on?'#1F7A47':'#D4D8D5';
+          c.querySelectorAll('span').forEach(function(s){s.style.color=on?'#FFFFFF':(s===c.children[1]?'#1A2920':'#8A9E92');});
+        });
+      };
+      el.appendChild(chip);
+    })(i);
+  }
+}
+
+function buildQtyRows(){
+  var el=document.getElementById('qty-rows');
+  if(!el) return;
+  el.innerHTML='';
+  var rows=[['adult','ผู้ใหญ่ (ไทย)','฿200'],['child','เด็ก (ไทย)','฿100'],['foreign','ผู้ใหญ่ (ต่างชาติ)','฿400']];
+  rows.forEach(function(r){
+    var k=r[0],l=r[1],p=r[2];
+    var row=document.createElement('div');
+    row.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #EAECEB;';
+    row.innerHTML='<div><div style="font-size:14px;color:#1A2920;font-weight:600;">'+l+'</div><div style="font-size:12px;color:#8A9E92;">'+p+' / คน</div></div><div style="display:flex;align-items:center;gap:10px;"><button class="qty-btn" onclick="chQ(\''+k+'\',-1)">−</button><span id="q-'+k+'" style="font-size:16px;font-weight:700;color:#1A2920;min-width:22px;text-align:center;">'+qty[k]+'</span><button class="qty-btn" onclick="chQ(\''+k+'\',1)">+</button></div>';
+    el.appendChild(row);
+  });
+  // remove border on last
+  if(el.lastChild) el.lastChild.style.borderBottom='none';
+}
+
+function chQ(type,d){
+  var n=qty[type]+d;
+  if(n<0) return;
+  var check={adult:qty.adult,child:qty.child,foreign:qty.foreign};
+  check[type]=n;
+  if(check.adult+check.child+check.foreign===0) return;
+  qty[type]=n;
+  var el=document.getElementById('q-'+type);
+  if(el) el.textContent=n;
+  updateTotal();
+}
+
+function pickRound(r){
+  selRound=r;
+  var m=document.getElementById('r-morning');
+  var a=document.getElementById('r-afternoon');
+  if(r==='morning'){
+    m.style.backgroundColor='#1F7A47';m.style.borderColor='#1F7A47';m.style.color='#FFFFFF';
+    m.querySelector('span').style.color='rgba(255,255,255,.75)';
+    a.style.backgroundColor='#FFFFFF';a.style.borderColor='#D4D8D5';a.style.color='#4A5E52';
+    a.querySelector('span').style.color='#8A9E92';
+  } else {
+    a.style.backgroundColor='#1F7A47';a.style.borderColor='#1F7A47';a.style.color='#FFFFFF';
+    a.querySelector('span').style.color='rgba(255,255,255,.75)';
+    m.style.backgroundColor='#FFFFFF';m.style.borderColor='#D4D8D5';m.style.color='#4A5E52';
+    m.querySelector('span').style.color='#8A9E92';
+  }
+}
+
+function pickVeh(v){
+  veh=v;
+  ['none','car','moto'].forEach(function(id){
+    var btn=document.getElementById('v-'+id);
+    if(!btn) return;
+    var on=id===v;
+    btn.style.backgroundColor=on?'#1F7A47':'#FFFFFF';
+    btn.style.borderColor=on?'#1F7A47':'#D4D8D5';
+    btn.style.color=on?'#FFFFFF':'#4A5E52';
+  });
+  updateTotal();
+}
+
+function buildSummary(){
+  var el=document.getElementById('summary-rows');
+  if(!el) return;
+  el.innerHTML='';
+  if(qty.adult>0) el.innerHTML+='<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #EAECEB;"><span style="font-size:13px;color:#4A5E52;">ผู้ใหญ่ (ไทย) × '+qty.adult+'</span><strong style="font-size:13px;color:#1A2920;">฿'+(qty.adult*200).toLocaleString()+'</strong></div>';
+  if(qty.child>0) el.innerHTML+='<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #EAECEB;"><span style="font-size:13px;color:#4A5E52;">เด็ก (ไทย) × '+qty.child+'</span><strong style="font-size:13px;color:#1A2920;">฿'+(qty.child*100).toLocaleString()+'</strong></div>';
+  if(qty.foreign>0) el.innerHTML+='<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #EAECEB;"><span style="font-size:13px;color:#4A5E52;">ต่างชาติ × '+qty.foreign+'</span><strong style="font-size:13px;color:#1A2920;">฿'+(qty.foreign*400).toLocaleString()+'</strong></div>';
+  if(veh==='car') el.innerHTML+='<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #EAECEB;"><span style="font-size:13px;color:#4A5E52;">รถเก๋ง</span><strong style="font-size:13px;color:#1A2920;">฿50</strong></div>';
+  if(veh==='moto') el.innerHTML+='<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #EAECEB;"><span style="font-size:13px;color:#4A5E52;">รถจักรยานยนต์</span><strong style="font-size:13px;color:#1A2920;">฿20</strong></div>';
+}
+
+function buildPayOptions(){
+  var el=document.getElementById('pay-options');
+  if(!el) return;
+  el.innerHTML='';
+  var opts=[
+    ['mgc_bank_card_line','บัตรเครดิต/เดบิต','Visa, Mastercard, JCB'],
+    ['mgc_qrcode_line','พร้อมเพย์','โอนผ่าน QR Code'],
+    ['mgc_building_3_line','โอนผ่านธนาคาร','Internet Banking'],
+    ['mgc_wallet_3_line','True Money Wallet','e-Wallet']
+  ];
+  opts.forEach(function(o,i){
+    var div=document.createElement('div');
+    var on=i===selPay;
+    div.style.cssText='display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:10px;margin-bottom:8px;cursor:pointer;border:1.5px solid '+(on?'#1F7A47':'#D4D8D5')+';background-color:'+(on?'#EEF8F3':'#FFFFFF')+';';
+    div.innerHTML='<div style="width:42px;height:42px;border-radius:8px;background:#F7F8F7;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="'+o[0]+'" style="font-size:22px;color:#1F7A47;"></i></div><div><div style="font-size:14px;font-weight:700;color:#1A2920;">'+o[1]+'</div><div style="font-size:12px;color:#8A9E92;">'+o[2]+'</div></div><div style="margin-left:auto;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background-color:'+(on?'#1F7A47':'#FFFFFF')+';border:2px solid '+(on?'#1F7A47':'#D4D8D5')+';">'+(on?'<i class="mgc_check_line" style="font-size:13px;color:#FFFFFF;"></i>':'')+'</div>';
+    div.onclick=function(){selPay=i;buildPayOptions();updateTotal();};
+    el.appendChild(div);
+  });
+}
+
+function buildTicketInfo(){
+  var el=document.getElementById('tkt-info-rows');
+  if(!el) return;
+  var now=new Date();
+  now.setDate(now.getDate()+selDate);
+  var dateStr=now.getDate()+' '+TH_M[now.getMonth()]+' '+(now.getFullYear()+543);
+  var rows=[
+    ['วันที่เข้าชม',dateStr],
+    ['รอบ',selRound==='morning'?'รอบเช้า 09:00 น.':'รอบบ่าย 13:00 น.'],
+    ['จำนวนบัตร',(qty.adult+qty.child+qty.foreign)+' ใบ'],
+    ['ยานพาหนะ',veh==='none'?'ไม่มี':veh==='car'?'รถเก๋ง':'รถจักรยานยนต์'],
+    ['ยอดชำระ','฿'+getTotal().toLocaleString()]
+  ];
+  el.innerHTML=rows.map(function(r){
+    return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08);"><span style="font-size:12px;color:rgba(255,255,255,.55);">'+r[0]+'</span><strong style="font-size:12px;color:#FFFFFF;font-weight:600;">'+r[1]+'</strong></div>';
+  }).join('').replace(/border-bottom[^;]+;(?=<\/div>\s*$)/,'border-bottom:none;');
+}
+
+function onxt(el,nid){
+  if(el.value.length===1){var n=document.getElementById(nid);if(n)n.focus();}
+}
+function ochk(){
+  var v=['o1','o2','o3','o4','o5','o6'].map(function(id){return (document.getElementById(id)||{}).value||'';}).join('');
+  if(v==='123456') setTimeout(function(){go('s-otp-done');},150);
+}
+function vOtp(){
+  var v=['o1','o2','o3','o4','o5','o6'].map(function(id){return (document.getElementById(id)||{}).value||'';}).join('');
+  if(v==='123456'){go('s-otp-done');}
+  else{document.querySelectorAll('.obox').forEach(function(b){b.classList.add('err');setTimeout(function(){b.classList.remove('err');},900);});}
+}
+
+function showTab(name){
+  ['info','gallery','review'].forEach(function(t){
+    var el=document.getElementById('tab-'+t);
+    if(el) el.style.display=t===name?'block':'none';
+  });
+  document.querySelectorAll('.dtab').forEach(function(el,i){
+    var names=['info','gallery','review'];
+    el.classList.toggle('on',names[i]===name);
+  });
+}
+
+// ---- MAP ----
+var MAP_PARKS=[
+  {name:'ดอยอินทนนท์',loc:'เชียงใหม่',rate:'4.8',price:'เริ่ม ฿200',img:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&q=70',x:165,y:105},
+  {name:'หมู่เกาะสุรินทร์',loc:'พังงา',rate:'4.9',price:'เริ่ม ฿400',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300&q=70',x:148,y:340},
+  {name:'เขาใหญ่',loc:'นครราชสีมา',rate:'4.7',price:'เริ่ม ฿400',img:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&q=70',x:205,y:195},
+  {name:'ดอยผ้าห่มปก',loc:'เชียงใหม่',rate:'4.6',price:'เริ่ม ฿300',img:'https://images.unsplash.com/photo-1551632811-561732d1e306?w=300&q=70',x:155,y:85},
+  {name:'หมู่เกาะอ่างทอง',loc:'สุราษฎร์ธานี',rate:'4.8',price:'เริ่ม ฿300',img:'https://images.unsplash.com/photo-1476231682828-37e571bc172f?w=300&q=70',x:165,y:310},
+  {name:'แก่งกระจาน',loc:'เพชรบุรี',rate:'4.5',price:'เริ่ม ฿200',img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=300&q=70',x:172,y:230},
+  {name:'ภูกระดึง',loc:'เลย',rate:'4.7',price:'เริ่ม ฿200',img:'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=300&q=70',x:200,y:160}
+];
+var mapBuilt=false;
+function buildMapPins(){
+  var container=document.getElementById('map-pins');
+  if(!container||mapBuilt) return;
+  mapBuilt=true;
+  MAP_PARKS.forEach(function(p,i){
+    var pin=document.createElement('div');
+    pin.style.cssText='position:absolute;cursor:pointer;z-index:10;transform:translate(-50%,-100%);';
+    pin.style.left=p.x+'px';
+    pin.style.top=p.y+'px';
+    pin.innerHTML='<div style="background-color:#1F7A47;color:#FFFFFF;border-radius:20px;padding:4px 10px 4px 7px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;box-shadow:0 3px 10px rgba(0,0,0,.25);white-space:nowrap;"><i class="mgc_mountain_2_line" style="font-size:14px;"></i>'+p.name+'</div><div style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #1F7A47;margin:0 auto;"></div>';
+    pin.onclick=function(e){e.stopPropagation();showMapPopup(p);};
+    container.appendChild(pin);
+  });
+  var mapArea=container.parentElement;
+  mapArea.onclick=function(){closePopup();};
+}
+function showMapPopup(p){
+  document.getElementById('popup-img').src=p.img;
+  document.getElementById('popup-name').textContent=p.name;
+  document.getElementById('popup-loc').textContent='📍 '+p.loc;
+  document.getElementById('popup-rate').textContent=p.rate;
+  document.getElementById('popup-price').textContent=p.price;
+  document.getElementById('map-popup').style.display='block';
+}
+function closePopup(){document.getElementById('map-popup').style.display='none';}
+
+// ---- TICKETS ----
+var TICKET_DATA=[
+  {status:'active',park:'ดอยอินทนนท์',date:'20 พ.ค. 2568',round:'รอบเช้า 09:00',tickets:2,total:300,img:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&q=65',code:'TKT-2025-DOI-001234'},
+  {status:'active',park:'เขาใหญ่',date:'5 มิ.ย. 2568',round:'รอบบ่าย 13:00',tickets:3,total:700,img:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=200&q=65',code:'TKT-2025-KY-005678'},
+  {status:'used',park:'หมู่เกาะสุรินทร์',date:'10 เม.ย. 2568',round:'รอบเช้า 09:00',tickets:2,total:800,img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&q=65',code:'TKT-2025-SUR-009101'},
+  {status:'used',park:'แก่งกระจาน',date:'15 มี.ค. 2568',round:'รอบบ่าย 13:00',tickets:1,total:200,img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=200&q=65',code:'TKT-2025-KK-001122'},
+  {status:'used',park:'ภูกระดึง',date:'2 ก.พ. 2568',round:'รอบเช้า 09:00',tickets:4,total:1000,img:'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=200&q=65',code:'TKT-2025-PK-003344'},
+  {status:'cancel',park:'หมู่เกาะอ่างทอง',date:'1 ม.ค. 2568',round:'รอบบ่าย 13:00',tickets:2,total:600,img:'https://images.unsplash.com/photo-1476231682828-37e571bc172f?w=200&q=65',code:'TKT-2025-AT-007788'}
+];
+var curTicketFilter='active';
+function filterTickets(f){
+  curTicketFilter=f;
+  ['active','used','cancel'].forEach(function(k){
+    var btn=document.getElementById('tft-'+k);
+    if(!btn) return;
+    var on=k===f;
+    btn.style.backgroundColor=on?'rgba(255,255,255,.25)':'rgba(255,255,255,.1)';
+    btn.style.color=on?'#FFFFFF':'rgba(255,255,255,.65)';
+    btn.style.fontWeight=on?'700':'600';
+  });
+  var el=document.getElementById('ticket-list');
+  if(!el) return;
+  el.innerHTML='';
+  var items=TICKET_DATA.filter(function(t){return t.status===f;});
+  if(items.length===0){
+    el.innerHTML='<div style="text-align:center;padding:40px 20px;"><i class="mgc_ticket_line" style="font-size:48px;color:#D4D8D5;"></i><div style="font-size:14px;color:#8A9E92;margin-top:12px;">ไม่มีบัตรในหมวดนี้</div></div>';
+    return;
+  }
+  items.forEach(function(t){
+    var statusCfg={
+      active:{label:'พร้อมใช้',bg:'#D6F0E2',color:'#1B5E38',icon:'mgc_check_circle_line'},
+      used:{label:'ใช้แล้ว / รอรีวิว',bg:'#FEF3C7',color:'#D97706',icon:'mgc_star_line'},
+      cancel:{label:'ยกเลิก / คืนเงิน',bg:'#FFF0F0',color:'#E53E3E',icon:'mgc_close_circle_line'}
+    }[t.status];
+    var card=document.createElement('div');
+    card.style.cssText='background:#FFFFFF;border-radius:14px;border:1px solid #EAECEB;overflow:hidden;margin-bottom:12px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.07);transition:transform .15s;';
+    card.onmouseover=function(){this.style.transform='translateY(-2px)';};
+    card.onmouseout=function(){this.style.transform='';};
+    card.onclick=function(){go('s-purchased');};
+    card.innerHTML=
+      '<div style="display:flex;align-items:stretch;">'+
+        '<div style="width:90px;flex-shrink:0;overflow:hidden;"><img src="'+t.img+'" style="width:100%;height:100%;object-fit:cover;" alt="'+t.park+'"></div>'+
+        '<div style="flex:1;padding:12px 13px;">'+
+          '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:5px;">'+
+            '<div style="font-size:14px;font-weight:700;color:#1A2920;">'+t.park+'</div>'+
+            '<span style="display:inline-flex;align-items:center;gap:3px;background-color:'+statusCfg.bg+';color:'+statusCfg.color+';font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-left:6px;"><i class="'+statusCfg.icon+'" style="font-size:12px;"></i>'+statusCfg.label+'</span>'+
+          '</div>'+
+          '<div style="font-size:12px;color:#4A5E52;display:flex;align-items:center;gap:4px;margin-bottom:3px;"><i class="mgc_calendar_line" style="font-size:13px;color:#1F7A47;"></i>'+t.date+'</div>'+
+          '<div style="font-size:12px;color:#4A5E52;display:flex;align-items:center;gap:4px;margin-bottom:8px;"><i class="mgc_time_line" style="font-size:13px;color:#1F7A47;"></i>'+t.round+'</div>'+
+          '<div style="display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid #EAECEB;">'+
+            '<span style="font-size:11px;color:#8A9E92;display:flex;align-items:center;gap:3px;"><i class="mgc_ticket_line" style="font-size:13px;"></i>'+t.tickets+' ใบ</span>'+
+            '<strong style="font-size:14px;font-weight:700;color:#1B5E38;">฿'+t.total.toLocaleString()+'</strong>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    el.appendChild(card);
+  });
+}
+var ocrMockData = {
+  1: { name:'สมชาย ใจดี', id:'1-2345-67890-12-3', dob:'15 ม.ค. 2535', age:'32' },
+  2: { name:'น้องมะลิ ใจดี', id:'1-9876-54321-09-8', dob:'3 มี.ค. 2559', age:'8' }
+};
+
+function triggerOcr(person) {
+  var box = document.getElementById('ocr-box-'+person);
+  var loading = document.getElementById('ocr-loading-'+person);
+  var done = document.getElementById('ocr-done-'+person);
+  if (!box || !loading) return;
+  // hide upload box, show loading
+  box.style.display = 'none';
+  loading.style.display = 'block';
+  // simulate OCR processing 1.8s
+  setTimeout(function() {
+    loading.style.display = 'none';
+    done.style.display = 'flex';
+    // auto-fill fields
+    var data = ocrMockData[person];
+    var nameEl = document.getElementById('p'+person+'-name');
+    var idEl = document.getElementById('p'+person+'-id');
+    var dobEl = document.getElementById('p'+person+'-dob');
+    var ageEl = document.getElementById('p'+person+'-age');
+    if (nameEl) { nameEl.value = ''; setTimeout(function(){ typeValue(nameEl, data.name, 0); }, 100); }
+    if (idEl)   { idEl.value = '';   setTimeout(function(){ typeValue(idEl,   data.id,   0); }, 300); }
+    if (dobEl)  { dobEl.value = '';  setTimeout(function(){ typeValue(dobEl,  data.dob,  0); }, 500); }
+    if (ageEl)  { ageEl.value = '';  setTimeout(function(){ typeValue(ageEl,  data.age,  0); }, 700); }
+  }, 1800);
+}
+
+function typeValue(el, str, i) {
+  if (i <= str.length) {
+    el.value = str.substring(0, i);
+    el.style.borderColor = '#1F7A47';
+    setTimeout(function(){ typeValue(el, str, i+1); }, 30);
+  } else {
+    setTimeout(function(){ el.style.borderColor = ''; }, 600);
+  }
+}
+
+function resetOcrState(person) {
+  var box = document.getElementById('ocr-box-'+person);
+  var done = document.getElementById('ocr-done-'+person);
+  if (box) box.style.display = 'block';
+  if (done) done.style.display = 'none';
+}
+
+function resetOcrBox(person) {
+  var box = document.getElementById('ocr-box-'+person);
+  if (box && box.style.display !== 'none') {
+    box.style.borderColor = '#D4D8D5';
+    box.style.background = '#F7F8F7';
+  }
+}
+
+function toggleAccordion(id) {
+  var body = document.getElementById(id);
+  var icon = document.getElementById(id+'-icon');
+  if (!body) return;
+  var isOpen = body.style.display !== 'none';
+  body.style.display = isOpen ? 'none' : 'block';
+  body.classList.toggle('acc-body-open', !isOpen);
+  if (icon) icon.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+
+// init
+go('s-login');
+</script>
+</body>
+</html>
