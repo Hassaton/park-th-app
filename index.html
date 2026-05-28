@@ -250,92 +250,267 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 <div class="screen" id="s-login">
   <div class="sb sb-dark" style="background:#1A4A28;"><span>9:41</span><span>●●●</span></div>
   <!-- Hero illustration — fixed compact height -->
-  <div style="background:linear-gradient(180deg,#2B6B42 0%,#1E5233 55%,#163D26 100%);flex:0 0 230px;position:relative;overflow:hidden;flex-shrink:0;">
-
-    <!-- Sky gradient -->
+  <div style="background:linear-gradient(180deg,#2B6B42 0%,#1E5233 55%,#163D26 100%);flex:0 0 190px;position:relative;overflow:hidden;flex-shrink:0;">
     <div style="position:absolute;inset:0;background:linear-gradient(180deg,#4A8C5E 0%,#2B6B42 40%,#1A5230 100%);"></div>
-    <!-- Sun/glow -->
     <div style="position:absolute;top:18px;right:50px;width:40px;height:40px;border-radius:50%;background:rgba(255,220,80,.25);box-shadow:0 0 24px 12px rgba(255,220,80,.12);"></div>
-    <!-- Mountains -->
     <svg style="position:absolute;bottom:40px;left:0;width:100%;" viewBox="0 0 375 100" preserveAspectRatio="none">
       <ellipse cx="80" cy="100" rx="120" ry="80" fill="#1A5230" opacity=".8"/>
       <ellipse cx="300" cy="100" rx="110" ry="70" fill="#163D26" opacity=".9"/>
       <ellipse cx="190" cy="100" rx="140" ry="85" fill="#1E5C38" opacity=".6"/>
     </svg>
-    <!-- Trees -->
     <svg style="position:absolute;bottom:30px;left:0;width:100%;" viewBox="0 0 375 100">
       <g transform="translate(18,0)"><rect x="14" y="70" width="6" height="30" fill="#0F3A1E" rx="2"/><polygon points="17,8 38,68 -4,68" fill="#1A5C30"/><polygon points="17,28 34,66 0,66" fill="#22703A"/></g>
       <g transform="translate(330,10)"><rect x="10" y="60" width="5" height="30" fill="#0F3A1E" rx="1"/><polygon points="12,8 28,58 -4,58" fill="#1A5C30"/></g>
     </svg>
-    <!-- Ground -->
     <div style="position:absolute;bottom:0;left:0;right:0;height:36px;background:linear-gradient(180deg,#163D26,#0F2C1A);border-radius:60% 60% 0 0 / 20px 20px 0 0;"></div>
-
-    <!-- Circular badge/stamp — top left, compact -->
-    <div style="position:absolute;top:12px;left:16px;width:80px;height:80px;border-radius:50%;border:2.5px solid rgba(255,255,255,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:rgba(0,0,0,.15);backdrop-filter:blur(4px);">
+    <div style="position:absolute;top:12px;left:16px;width:68px;height:68px;border-radius:50%;border:2.5px solid rgba(255,255,255,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:rgba(0,0,0,.15);backdrop-filter:blur(4px);">
       <div style="position:absolute;inset:4px;border-radius:50%;border:1.5px dashed rgba(255,255,255,.25);"></div>
-      <i class="mgc_mountain_2_fill" style="font-size:22px;color:rgba(255,255,255,.9);"></i>
-      <div style="font-size:7px;font-weight:700;color:rgba(255,255,255,.9);letter-spacing:.1em;text-transform:uppercase;">อุทยาน</div>
-      <div style="font-size:6px;color:rgba(255,255,255,.65);letter-spacing:.08em;text-transform:uppercase;">แห่งชาติ</div>
+      <i class="mgc_mountain_2_fill" style="font-size:20px;color:rgba(255,255,255,.9);"></i>
+      <div style="font-size:6px;font-weight:700;color:rgba(255,255,255,.9);letter-spacing:.1em;text-transform:uppercase;">อุทยาน</div>
+      <div style="font-size:6px;color:rgba(255,255,255,.65);letter-spacing:.08em;">แห่งชาติ</div>
     </div>
-
-    <!-- Hiker — smaller, right side -->
-    <svg style="position:absolute;bottom:44px;right:20px;" width="80" height="106" viewBox="0 0 120 160">
-      <ellipse cx="60" cy="155" rx="28" ry="6" fill="rgba(0,0,0,.2)"/>
-      <rect x="38" y="58" width="22" height="30" rx="6" fill="#2D5A9E"/>
-      <rect x="40" y="65" width="8" height="5" rx="2" fill="#1E3F6F"/>
-      <rect x="44" y="60" width="32" height="38" rx="10" fill="#E8C87A"/>
-      <rect x="44" y="72" width="32" height="6" rx="0" fill="#D4A85A" opacity=".6"/>
-      <ellipse cx="60" cy="48" rx="18" ry="20" fill="#F5C5A0"/>
-      <rect x="42" y="28" width="36" height="8" rx="4" fill="#4A7A35"/>
-      <rect x="38" y="32" width="44" height="6" rx="3" fill="#3D6B2A"/>
-      <circle cx="53" cy="48" r="3" fill="#3A2510"/><circle cx="67" cy="48" r="3" fill="#3A2510"/>
-      <circle cx="54" cy="47" r="1" fill="white"/><circle cx="68" cy="47" r="1" fill="white"/>
-      <path d="M53 55 Q60 61 67 55" stroke="#3A2510" stroke-width="2" fill="none" stroke-linecap="round"/>
-      <ellipse cx="60" cy="32" rx="18" ry="8" fill="#3A2510"/>
-      <rect x="28" y="65" width="18" height="10" rx="5" fill="#F5C5A0" transform="rotate(-20,28,65)"/>
-      <rect x="75" y="62" width="18" height="10" rx="5" fill="#F5C5A0" transform="rotate(25,75,62)"/>
-      <rect x="46" y="96" width="12" height="36" rx="6" fill="#4A6FA5"/>
-      <rect x="62" y="96" width="12" height="36" rx="6" fill="#4A6FA5"/>
-      <rect x="44" y="126" width="16" height="12" rx="5" fill="#2C1A0A"/>
-      <rect x="60" y="126" width="16" height="12" rx="5" fill="#2C1A0A"/>
-      <rect x="88" y="60" width="4" height="75" rx="2" fill="#5C3A1A" transform="rotate(8,88,60)"/>
-    </svg>
-
-    <!-- Text overlay bottom left -->
-    <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(15,40,22,.9));padding:20px 20px 14px;">
-      <h1 style="color:var(--white);font-size:21px;font-weight:800;line-height:1.2;margin-bottom:4px;letter-spacing:-.3px;">สำรวจอุทยานของคุณ</h1>
-      <p style="color:rgba(255,255,255,.65);font-size:12px;">ระบบจองบัตรอุทยานแห่งชาติออนไลน์</p>
+    <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(15,40,22,.9));padding:14px 20px 10px;">
+      <h1 style="color:var(--white);font-size:18px;font-weight:800;line-height:1.2;margin-bottom:2px;letter-spacing:-.3px;">สำรวจอุทยานของคุณ</h1>
+      <p style="color:rgba(255,255,255,.65);font-size:11px;">ระบบจองบัตรอุทยานแห่งชาติออนไลน์</p>
     </div>
   </div>
 
-  <!-- Login form — scrollable, full remaining space -->
-  <div style="background:var(--cream);flex:1;padding:20px 20px 16px;overflow-y:auto;">
+  <!-- Nationality Tabs -->
+  <div style="background:var(--white);border-bottom:1.5px solid var(--cream3);flex-shrink:0;position:relative;">
+    <div style="display:flex;">
+      <div id="login-tab-thai" onclick="switchLoginTab('thai')" style="flex:1;height:46px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:700;color:var(--g600);cursor:pointer;border-bottom:3px solid var(--g500);transition:all .2s;position:relative;">
+        <span style="font-size:16px;">  </span><span>สัญชาติไทย</span>
+      </div>
+      <div id="login-tab-foreign" onclick="switchLoginTab('foreign')" style="flex:1;height:46px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:600;color:var(--n400);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;">
+        <span style="font-size:16px;"> </span><span>Foreigner</span>
+      </div>
+    </div>
+    <!-- sliding indicator -->
+    <div id="login-tab-indicator" style="position:absolute;bottom:-1px;left:0;width:50%;height:3px;background:var(--g500);border-radius:3px 3px 0 0;transition:left .25s cubic-bezier(.4,0,.2,1);"></div>
+  </div>
+
+  <!-- Login form — scrollable -->
+  <div style="background:var(--cream);flex:1;overflow-y:auto;">
+
+    <!-- ── Thai Tab Content ── -->
+    <div id="login-pane-thai" style="padding:18px 20px 16px;animation:fadeIn .2s ease;">
+      <div class="fld">
+        <label class="fld-label">อีเมล / เบอร์โทรศัพท์</label>
+        <div style="position:relative;">
+          <i class="mgc_mail_line" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--n400);"></i>
+          <input type="text" value="demo@example.com" style="padding-left:46px!important;">
+        </div>
+      </div>
+      <div class="fld" style="margin-bottom:10px;">
+        <label class="fld-label">รหัสผ่าน</label>
+        <div style="position:relative;">
+          <i class="mgc_lock_line" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--n400);"></i>
+          <input type="password" value="12345678" style="padding-left:46px!important;">
+          <i class="mgc_eye_close_line" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--n400);cursor:pointer;"></i>
+        </div>
+      </div>
+      <div style="text-align:right;margin-bottom:14px;">
+        <span onclick="go('s-forgot-pw')" style="font-size:12px;color:var(--g600);font-weight:700;cursor:pointer;">ลืมรหัสผ่าน?</span>
+      </div>
+      <button class="btn-primary" onclick="go('s-home')">เข้าสู่ระบบ →</button>
+      <div style="display:flex;align-items:center;gap:10px;margin:12px 0;">
+        <div style="flex:1;height:1px;background:var(--cream3);"></div>
+        <span style="font-size:12px;color:var(--n400);">หรือเข้าสู่ระบบด้วย</span>
+        <div style="flex:1;height:1px;background:var(--cream3);"></div>
+      </div>
+      <button class="btn-ghost" onclick="go('s-home')"><i class="mgc_idcard_line" style="font-size:18px;"></i> ดำเนินการต่อด้วย ThaID</button>
+      <p style="text-align:center;margin-top:14px;font-size:13px;color:var(--n500);">ยังไม่มีบัญชี? <span onclick="go('s-account-type')" style="color:var(--g600);font-weight:700;text-decoration:underline;cursor:pointer;">สมัครสมาชิก</span></p>
+    </div>
+
+    <!-- ── Foreigner Tab Content ── -->
+    <div id="login-pane-foreign" style="display:none;padding:18px 20px 16px;animation:fadeIn .2s ease;">
+      <div class="fld">
+        <label class="fld-label" style="letter-spacing:.05em;">EMAIL ADDRESS</label>
+        <div style="position:relative;">
+          <i class="mgc_mail_line" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--n400);"></i>
+          <input type="email" placeholder="your@email.com" style="padding-left:46px!important;">
+        </div>
+      </div>
+      <div class="fld" style="margin-bottom:10px;">
+        <label class="fld-label" style="letter-spacing:.05em;">PASSWORD</label>
+        <div style="position:relative;">
+          <i class="mgc_lock_line" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--n400);"></i>
+          <input type="password" placeholder="Enter your password" style="padding-left:46px!important;">
+          <i class="mgc_eye_close_line" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--n400);cursor:pointer;"></i>
+        </div>
+      </div>
+      <div style="text-align:right;margin-bottom:14px;">
+        <span onclick="go('s-forgot-pw')" style="font-size:12px;color:var(--g600);font-weight:700;cursor:pointer;">Forgot password?</span>
+      </div>
+      <button class="btn-primary" onclick="go('s-home')"><i class="mgc_login_line" style="font-size:18px;"></i>Sign In</button>
+      <!-- Passport note -->
+      <div style="background:var(--white);border:1.5px solid var(--cream3);border-radius:var(--r-lg);padding:12px 14px;margin:14px 0 0;display:flex;align-items:flex-start;gap:10px;">
+        <i class="mgc_information_line" style="font-size:16px;color:var(--warn);flex-shrink:0;margin-top:1px;"></i>
+        <div style="font-size:12px;color:var(--n700);line-height:1.65;">Your <strong>passport number</strong> will be required when booking to verify visitor status and apply the correct admission fee.</div>
+      </div>
+      <p style="text-align:center;margin-top:14px;font-size:13px;color:var(--n500);">No account? <span onclick="go('s-account-type')" style="color:var(--g600);font-weight:700;text-decoration:underline;cursor:pointer;">Register here</span></p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== ACCOUNT TYPE ===================== -->
+<div class="screen" id="s-account-type">
+  <div class="sb sb-cream"><span style="color:var(--n700);">9:41</span><span style="color:var(--n700);">●●●</span></div>
+  <div style="background:var(--cream);padding:12px 20px 16px;display:flex;align-items:center;gap:12px;border-bottom:1.5px solid var(--cream3);flex-shrink:0;">
+    <button class="back-btn" onclick="go('s-login')"><i class="mgc_arrow_left_line" style="font-size:18px;"></i></button>
+    <div>
+      <span style="font-size:17px;font-weight:700;color:var(--n900);">สมัครสมาชิก</span>
+    </div>
+  </div>
+  <div class="scroll-area" style="background:var(--cream);"><div style="padding:24px 20px;">
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:28px;">
+      <div style="width:72px;height:72px;border-radius:50%;background:var(--g100);border:3px solid var(--g200);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 4px 16px rgba(31,122,71,.15);">
+        <i class="mgc_user_add_line" style="font-size:34px;color:var(--g600);"></i>
+      </div>
+      <h2 style="font-size:20px;font-weight:800;color:var(--n900);margin-bottom:6px;">เลือกประเภทบัญชี</h2>
+      <p style="font-size:13px;color:var(--n500);">กรุณาเลือกประเภทบัญชีที่ต้องการสมัคร</p>
+    </div>
+
+    <!-- Card: บุคคลทั่วไป -->
+    <div onclick="go('s-register')" style="background:var(--white);border:2px solid var(--g200);border-radius:var(--r-xl);padding:22px 20px;margin-bottom:14px;cursor:pointer;box-shadow:var(--sh-card);transition:all .2s;position:relative;overflow:hidden;" onmouseover="this.style.borderColor='var(--g500)';this.style.background='var(--g50)';this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='var(--g200)';this.style.background='var(--white)';this.style.transform='none';">
+      <div style="position:absolute;top:0;right:0;width:90px;height:90px;background:radial-gradient(circle at top right,var(--g50),transparent 70%);border-radius:0 var(--r-xl) 0 0;"></div>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div style="width:56px;height:56px;border-radius:18px;background:var(--g100);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(31,122,71,.15);">
+          <i class="mgc_user_3_line" style="font-size:28px;color:var(--g600);"></i>
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:16px;font-weight:800;color:var(--n900);margin-bottom:4px;">บุคคลทั่วไป</div>
+          <div style="font-size:12px;color:var(--n500);line-height:1.6;">สำหรับนักท่องเที่ยวที่ต้องการจองบัตรเข้าชมอุทยาน</div>
+        </div>
+        <i class="mgc_arrow_right_line" style="font-size:20px;color:var(--g400);flex-shrink:0;"></i>
+      </div>
+    </div>
+
+    <!-- Card: ผู้ประกอบการ -->
+    <div onclick="go('s-operator-stub')" style="background:var(--white);border:2px solid var(--cream3);border-radius:var(--r-xl);padding:22px 20px;cursor:pointer;box-shadow:var(--sh-card);transition:all .2s;position:relative;overflow:hidden;" onmouseover="this.style.borderColor='#D97706';this.style.background='#FFFBF0';this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='var(--cream3)';this.style.background='var(--white)';this.style.transform='none';">
+      <div style="position:absolute;top:0;right:0;width:90px;height:90px;background:radial-gradient(circle at top right,#FEF3C7,transparent 70%);border-radius:0 var(--r-xl) 0 0;"></div>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div style="width:56px;height:56px;border-radius:18px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(217,119,6,.15);">
+          <i class="mgc_building_4_line" style="font-size:28px;color:#D97706;"></i>
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:16px;font-weight:800;color:var(--n900);margin-bottom:4px;">ผู้ประกอบการ</div>
+          <div style="font-size:11px;color:var(--n400);font-weight:600;margin-bottom:4px;">Tour Operator / Business</div>
+          <div style="font-size:12px;color:var(--n500);line-height:1.6;">สำหรับธุรกิจนำเที่ยว บริษัททัวร์ และผู้ประกอบการ</div>
+        </div>
+        <i class="mgc_arrow_right_line" style="font-size:20px;color:#D97706;flex-shrink:0;"></i>
+      </div>
+    </div>
+
+  </div></div>
+</div>
+
+<!-- ===================== OPERATOR STUB ===================== -->
+<div class="screen" id="s-operator-stub">
+  <div class="sb sb-cream"><span style="color:var(--n700);">9:41</span><span style="color:var(--n700);">●●●</span></div>
+  <div style="background:var(--cream);padding:12px 20px 16px;display:flex;align-items:center;gap:12px;border-bottom:1.5px solid var(--cream3);flex-shrink:0;">
+    <button class="back-btn" onclick="go('s-account-type')"><i class="mgc_arrow_left_line" style="font-size:18px;"></i></button>
+    <span style="font-size:17px;font-weight:700;color:var(--n900);">ผู้ประกอบการ / Tour Operator</span>
+  </div>
+  <div class="scroll-area" style="background:var(--cream);"><div style="padding:40px 24px;text-align:center;">
+    <div style="width:90px;height:90px;border-radius:28px;background:#FEF3C7;border:3px solid #FDE68A;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(217,119,6,.15);">
+      <i class="mgc_building_4_line" style="font-size:44px;color:#D97706;"></i>
+    </div>
+    <h2 style="font-size:20px;font-weight:800;color:var(--n900);margin-bottom:10px;">ลงทะเบียนผู้ประกอบการ</h2>
+    <p style="font-size:13px;color:var(--n500);line-height:1.8;margin-bottom:28px;">กรุณากรอกข้อมูลธุรกิจและเอกสารการจดทะเบียน<br>เพื่อสมัครเป็นผู้ประกอบการนำเที่ยวอุทยาน</p>
+    <!-- Steps preview -->
+    <div style="background:var(--white);border-radius:var(--r-xl);border:1.5px solid var(--cream3);padding:16px 18px;text-align:left;margin-bottom:20px;box-shadow:var(--sh-card);">
+      <div style="font-size:12px;font-weight:700;color:var(--n400);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">ขั้นตอนการลงทะเบียน</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;align-items:center;gap:12px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--g100);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--g600);flex-shrink:0;">1</div><div style="font-size:13px;color:var(--n700);">กรอกข้อมูลธุรกิจและใบอนุญาต</div></div>
+        <div style="display:flex;align-items:center;gap:12px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--g100);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--g600);flex-shrink:0;">2</div><div style="font-size:13px;color:var(--n700);">อัปโหลดเอกสารจดทะเบียน</div></div>
+        <div style="display:flex;align-items:center;gap:12px;"><div style="width:28px;height:28px;border-radius:50%;background:var(--g100);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--g600);flex-shrink:0;">3</div><div style="font-size:13px;color:var(--n700);">รอการอนุมัติจากเจ้าหน้าที่ (1-3 วัน)</div></div>
+      </div>
+    </div>
+    <button class="btn-primary" style="background:#D97706!important;box-shadow:0 6px 20px rgba(217,119,6,.35)!important;" onclick="alert('ฟีเจอร์นี้กำลังพัฒนา')"><i class="mgc_edit_line" style="font-size:18px;"></i>เริ่มลงทะเบียนธุรกิจ</button>
+    <button class="btn-ghost" onclick="go('s-account-type')" style="margin-top:10px;">ย้อนกลับ</button>
+  </div></div>
+</div>
+
+<!-- ===================== FORGOT PASSWORD ===================== -->
+<div class="screen" id="s-forgot-pw">
+  <div class="sb sb-cream"><span style="color:var(--n700);">9:41</span><span style="color:var(--n700);">●●●</span></div>
+  <div style="background:var(--cream);padding:12px 20px 16px;display:flex;align-items:center;gap:12px;border-bottom:1.5px solid var(--cream3);flex-shrink:0;">
+    <button class="back-btn" onclick="go('s-login')"><i class="mgc_arrow_left_line" style="font-size:18px;"></i></button>
+    <span style="font-size:17px;font-weight:700;color:var(--n900);">ลืมรหัสผ่าน</span>
+  </div>
+  <div class="scroll-area" style="background:var(--cream);"><div style="padding:28px 20px;">
+    <!-- Icon -->
+    <div style="text-align:center;margin-bottom:24px;">
+      <div style="width:80px;height:80px;border-radius:50%;background:var(--g100);border:3px solid var(--g200);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 4px 16px rgba(31,122,71,.15);">
+        <i class="mgc_key_2_line" style="font-size:38px;color:var(--g600);"></i>
+      </div>
+      <h2 style="font-size:19px;font-weight:800;color:var(--n900);margin-bottom:6px;">รีเซ็ตรหัสผ่าน</h2>
+      <p style="font-size:13px;color:var(--n500);line-height:1.65;">กรอกอีเมลหรือเบอร์โทรที่ลงทะเบียนไว้<br>เพื่อรับลิงก์รีเซ็ตรหัสผ่าน</p>
+    </div>
+    <!-- Account field -->
     <div class="fld">
       <label class="fld-label">อีเมล / เบอร์โทรศัพท์</label>
       <div style="position:relative;">
-        <i class="mgc_mail_line" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--n400);"></i>
-        <input type="text" value="demo@example.com" style="padding-left:46px!important;">
+        <i class="mgc_user_3_line" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--n400);"></i>
+        <input type="text" placeholder="กรอกอีเมลหรือเบอร์โทร" style="padding-left:46px!important;">
       </div>
     </div>
-    <div class="fld" style="margin-bottom:16px;">
-      <label class="fld-label">รหัสผ่าน</label>
-      <div style="position:relative;">
-        <i class="mgc_lock_line" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--n400);"></i>
-        <input type="password" value="12345678" style="padding-left:46px!important;">
-        <i class="mgc_eye_close_line" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--n400);cursor:pointer;"></i>
+    <!-- Channel selector -->
+    <div style="margin-bottom:20px;">
+      <div style="font-size:11px;font-weight:700;color:var(--n500);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">เลือกช่องทางรับรหัส</div>
+      <!-- Email option -->
+      <div id="fp-channel-email" onclick="selectFpChannel('email')" style="display:flex;align-items:center;gap:14px;padding:16px;border-radius:var(--r-lg);margin-bottom:10px;cursor:pointer;border:2px solid var(--g500);background:var(--g50);transition:all .2s;">
+        <div style="width:44px;height:44px;border-radius:14px;background:var(--g100);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="mgc_mail_line" style="font-size:22px;color:var(--g600);"></i>
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:700;color:var(--n900);">ส่งทางอีเมล</div>
+          <div style="font-size:12px;color:var(--n500);">รับลิงก์รีเซ็ตรหัสผ่านทางอีเมล</div>
+        </div>
+        <div id="fp-radio-email" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--g500);background:var(--g500);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;">
+          <div style="width:8px;height:8px;border-radius:50%;background:white;"></div>
+        </div>
+      </div>
+      <!-- SMS option -->
+      <div id="fp-channel-sms" onclick="selectFpChannel('sms')" style="display:flex;align-items:center;gap:14px;padding:16px;border-radius:var(--r-lg);cursor:pointer;border:2px solid var(--cream3);background:var(--white);transition:all .2s;">
+        <div style="width:44px;height:44px;border-radius:14px;background:var(--cream2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="mgc_comment_line" style="font-size:22px;color:var(--n500);"></i>
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:700;color:var(--n900);">OTP ทาง SMS</div>
+          <div style="font-size:12px;color:var(--n500);">รับรหัส OTP ผ่านข้อความมือถือ</div>
+        </div>
+        <div id="fp-radio-sms" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--cream3);background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;">
+          <div style="width:8px;height:8px;border-radius:50%;background:transparent;transition:background .2s;"></div>
+        </div>
       </div>
     </div>
-    <div style="text-align:right;margin-top:-10px;margin-bottom:14px;">
-      <span style="font-size:12px;color:var(--g600);font-weight:700;cursor:pointer;">ลืมรหัสผ่าน?</span>
+    <button class="btn-primary" onclick="go('s-forgot-pw-sent')"><i class="mgc_send_plane_line" style="font-size:18px;"></i>ส่งคำขอรีเซ็ตรหัสผ่าน</button>
+    <button class="btn-ghost" onclick="go('s-login')" style="margin-top:10px;">กลับสู่หน้าเข้าสู่ระบบ</button>
+  </div></div>
+</div>
+
+<!-- ===================== FORGOT PASSWORD SENT ===================== -->
+<div class="screen" id="s-forgot-pw-sent">
+  <div class="sb sb-cream"><span style="color:var(--n700);">9:41</span><span style="color:var(--n700);">●●●</span></div>
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 28px;background:var(--cream);">
+    <svg width="120" height="120" viewBox="0 0 140 140" style="margin-bottom:20px;">
+      <circle cx="70" cy="70" r="60" fill="#D8F0E4" opacity=".6"/>
+      <circle cx="70" cy="70" r="46" fill="#A8D8BC" opacity=".5"/>
+      <circle cx="70" cy="70" r="35" fill="#1F7A47"/>
+      <path d="M50 70 L63 83 L92 54" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    <h2 style="font-size:22px;font-weight:800;color:var(--n900);margin-bottom:10px;text-align:center;">ส่งคำขอเรียบร้อย!</h2>
+    <p style="font-size:13px;color:var(--n500);text-align:center;line-height:1.8;margin-bottom:32px;">ระบบได้ส่งลิงก์รีเซ็ตรหัสผ่านไปยังอีเมล<br>ของคุณแล้ว กรุณาตรวจสอบกล่องจดหมาย</p>
+    <div style="background:var(--white);border:1.5px solid var(--cream3);border-radius:var(--r-lg);padding:14px 18px;width:100%;margin-bottom:24px;display:flex;align-items:center;gap:10px;">
+      <i class="mgc_information_line" style="font-size:16px;color:var(--n400);flex-shrink:0;"></i>
+      <span style="font-size:12px;color:var(--n500);line-height:1.6;">ลิงก์มีอายุ 30 นาที หากไม่พบอีเมล กรุณาตรวจสอบโฟลเดอร์ Spam</span>
     </div>
-    <button class="btn-primary" onclick="go('s-home')">เข้าสู่ระบบ →</button>
-    <div style="display:flex;align-items:center;gap:10px;margin:14px 0;">
-      <div style="flex:1;height:1px;background:var(--cream3);"></div>
-      <span style="font-size:12px;color:var(--n400);">หรือเข้าสู่ระบบด้วย</span>
-      <div style="flex:1;height:1px;background:var(--cream3);"></div>
-    </div>
-    <button class="btn-ghost" onclick="go('s-home')"><i class="mgc_idcard_line" style="font-size:18px;"></i>ThaID</button>
-    <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--n500);">ยังไม่มีบัญชี? <span onclick="go('s-register')" style="color:var(--g600);font-weight:700;text-decoration:underline;cursor:pointer;">สมัครสมาชิก</span></p>
+    <button class="btn-primary" style="width:220px;" onclick="go('s-login')">กลับสู่หน้าเข้าสู่ระบบ</button>
   </div>
 </div>
 
@@ -343,14 +518,19 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 <div class="screen" id="s-register">
   <div class="sb sb-cream"><span style="color:var(--n700);">9:41</span><span style="color:var(--n700);">●●●</span></div>
   <div style="background:var(--cream);padding:12px 20px 16px;display:flex;align-items:center;gap:12px;border-bottom:1.5px solid var(--cream3);flex-shrink:0;">
-    <button class="back-btn" onclick="go('s-login')"><i class="mgc_arrow_left_line" style="font-size:18px;"></i></button>
-    <span style="font-size:17px;font-weight:700;color:var(--n900);">สมัครสมาชิก</span>
+    <button class="back-btn" onclick="go('s-account-type')"><i class="mgc_arrow_left_line" style="font-size:18px;"></i></button>
+    <div>
+      <span style="font-size:17px;font-weight:700;color:var(--n900);">สมัครสมาชิก</span>
+      <div style="display:flex;align-items:center;gap:6px;margin-top:2px;">
+        <i class="mgc_user_3_line" style="font-size:12px;color:var(--g600);"></i>
+        <span style="font-size:11px;font-weight:600;color:var(--g600);">บุคคลทั่วไป</span>
+      </div>
+    </div>
   </div>
   <div class="scroll-area" style="background:var(--cream);"><div style="padding:16px 20px;">
 
     <!-- ── Shared OCR banner component ── -->
     <div id="reg-ocr-banner" onclick="startRegOcr()" style="display:flex;align-items:center;gap:12px;background:var(--g50);border:1.5px dashed var(--g200);border-radius:var(--r-lg);padding:12px 14px;margin-bottom:18px;cursor:pointer;transition:all .2s;" onmouseover="this.style.background='#E0F4EA'" onmouseout="this.style.background='var(--g50)'">
-      <!-- ID card mini-illustration -->
       <div style="flex-shrink:0;">
         <svg width="52" height="34" viewBox="0 0 52 34" style="display:block;">
           <rect width="52" height="34" rx="4" fill="#D8F0E4" stroke="#A8D8BC" stroke-width="1.2"/>
@@ -372,21 +552,25 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
       <div id="reg-ocr-ok-ic" style="display:none;flex-shrink:0;"><i class="mgc_check_circle_fill" style="font-size:22px;color:var(--g600);"></i></div>
     </div>
 
-    <!-- ── สัญชาติ ── -->
-    <div class="fld">
-      <label class="fld-label">สัญชาติ</label>
-      <select id="reg-nation" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2214%22 height=%2214%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%234A5E52%22 stroke-width=%222%22%3E%3Cpolyline points=%226 9 12 15 18 9%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;"><option>Thailand</option><option>ต่างชาติ</option><option>อื่น ๆ</option></select>
-    </div>
-
     <!-- ── เลขบัตร ── -->
-    <div class="fld"><label class="fld-label">หมายเลขบัตรประชาชน / หนังสือเดินทาง</label><input id="reg-idno" type="text" placeholder="X-XXXX-XXXXX-XX-X"></div>
+    <div class="fld"><label class="fld-label">หมายเลขบัตรประชาชน</label><input id="reg-idno" type="text" placeholder="X-XXXX-XXXXX-XX-X"></div>
 
-    <!-- ── คำนำหน้า + ชื่อ ── -->
+    <!-- ── คำนำหน้า ── -->
     <div class="fld">
       <label class="fld-label">คำนำหน้า</label>
       <select id="reg-prefix" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2214%22 height=%2214%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%234A5E52%22 stroke-width=%222%22%3E%3Cpolyline points=%226 9 12 15 18 9%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;"><option>นาย</option><option>นาง</option><option>นางสาว</option></select>
     </div>
-    <div class="fld"><label class="fld-label">ชื่อ-นามสกุล</label><input id="reg-name" type="text" placeholder="ชื่อ นามสกุล"></div>
+    <!-- ── ชื่อ / นามสกุล 2-col ── -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+      <div>
+        <label class="fld-label">ชื่อ</label>
+        <input id="reg-firstname" type="text" placeholder="ชื่อ">
+      </div>
+      <div>
+        <label class="fld-label">นามสกุล</label>
+        <input id="reg-lastname" type="text" placeholder="นามสกุล">
+      </div>
+    </div>
 
     <!-- ── เพศ ── -->
     <div class="fld">
@@ -409,15 +593,17 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
       </div>
     </div>
 
-    <!-- ── เบอร์โทร ── -->
-    <div class="fld"><label class="fld-label">เบอร์โทรศัพท์ (สำหรับยืนยัน OTP)</label>
+    <!-- ── อีเมล (ใช้ยืนยัน OTP) ── -->
+    <div class="fld">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <label class="fld-label" style="margin-bottom:0;">อีเมล</label>
+        <span style="background:var(--g600);color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:var(--r-pill);letter-spacing:.04em;">ใช้ยืนยัน OTP</span>
+      </div>
       <div style="position:relative;">
-        <input type="tel" placeholder="08x xxx xxxx">
+        <i class="mgc_mail_line" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--n400);"></i>
+        <input type="email" placeholder="email@example.com" style="padding-left:46px!important;border-color:var(--g200)!important;">
       </div>
     </div>
-
-    <!-- ── อีเมล ── -->
-    <div class="fld"><label class="fld-label">อีเมล</label><input type="email" placeholder="email@example.com"></div>
 
     <!-- ── ที่อยู่ ── -->
     <div style="height:1px;background:var(--cream3);margin:18px 0 16px;"></div>
@@ -487,7 +673,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
       <i class="mgc_close_circle_line" style="font-size:16px;color:var(--danger);flex-shrink:0;"></i>
       <span style="font-size:12px;color:var(--danger);font-weight:600;">กรุณายอมรับนโยบายคุ้มครองข้อมูลส่วนบุคคลก่อนดำเนินการต่อ</span>
     </div>
-    <button class="btn-primary" onclick="submitRegister()"><i class="mgc_shield_check_line" style="font-size:18px;"></i>ขอรับ OTP เพื่อยืนยัน</button>
+    <button class="btn-primary" onclick="submitRegister()"><i class="mgc_mail_send_line" style="font-size:18px;"></i>ขอรับ OTP ทางอีเมล</button>
     <div style="height:28px;"></div>
   </div></div>
 </div>
@@ -504,7 +690,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
       <i class="mgc_lock_line" style="font-size:40px;color:var(--g600);"></i>
     </div>
     <h3 style="font-size:21px;font-weight:800;color:var(--n900);margin-bottom:8px;">กรอกรหัส OTP</h3>
-    <p style="font-size:13px;color:var(--n500);line-height:1.7;margin-bottom:10px;">ระบบส่งรหัส OTP ไปยัง<br><strong style="color:var(--n900);">08x-xxx-xxxx</strong></p>
+    <p style="font-size:13px;color:var(--n500);line-height:1.7;margin-bottom:10px;">ระบบส่งรหัส OTP ไปยัง<br><strong style="color:var(--n900);">your.email***.com</strong></p>
     <div style="background:var(--g50);border:1.5px solid var(--g100);border-radius:var(--r-md);padding:10px 16px;margin-bottom:24px;display:inline-flex;align-items:center;gap:8px;">
       <i class="mgc_information_line" style="font-size:14px;color:var(--g600);"></i>
       <span style="font-size:12px;color:var(--g700);">รหัส OTP ทดสอบ: <strong>1 2 3 4 5 6</strong></span>
@@ -3011,6 +3197,49 @@ go=function(id){
     if(id==='s-profile')setupProfileCompact();
   },50);
 };
+
+// ── Login nationality tabs ──
+function switchLoginTab(tab){
+  var isThai=tab==='thai';
+  // Panes
+  document.getElementById('login-pane-thai').style.display=isThai?'block':'none';
+  document.getElementById('login-pane-foreign').style.display=isThai?'none':'block';
+  // Tab labels
+  var tThai=document.getElementById('login-tab-thai');
+  var tForeign=document.getElementById('login-tab-foreign');
+  tThai.style.color=isThai?'var(--g600)':'var(--n400)';
+  tThai.style.fontWeight=isThai?'700':'600';
+  tThai.style.borderBottomColor=isThai?'var(--g500)':'transparent';
+  tForeign.style.color=isThai?'var(--n400)':'var(--g600)';
+  tForeign.style.fontWeight=isThai?'600':'700';
+  tForeign.style.borderBottomColor=isThai?'transparent':'var(--g500)';
+  // Sliding indicator
+  document.getElementById('login-tab-indicator').style.left=isThai?'0':'50%';
+}
+
+// ── Forgot password channel selector ──
+function selectFpChannel(ch){
+  var isEmail=ch==='email';
+  var emailCard=document.getElementById('fp-channel-email');
+  var smsCard=document.getElementById('fp-channel-sms');
+  var emailRadio=document.getElementById('fp-radio-email');
+  var smsRadio=document.getElementById('fp-radio-sms');
+  // Email card
+  emailCard.style.borderColor=isEmail?'var(--g500)':'var(--cream3)';
+  emailCard.style.background=isEmail?'var(--g50)':'var(--white)';
+  emailRadio.style.background=isEmail?'var(--g500)':'white';
+  emailRadio.style.borderColor=isEmail?'var(--g500)':'var(--cream3)';
+  emailRadio.querySelector('div').style.background=isEmail?'white':'transparent';
+  // SMS card
+  smsCard.style.borderColor=isEmail?'var(--cream3)':'var(--g500)';
+  smsCard.style.background=isEmail?'var(--white)':'var(--g50)';
+  smsRadio.style.background=isEmail?'white':'var(--g500)';
+  smsRadio.style.borderColor=isEmail?'var(--cream3)':'var(--g500)';
+  smsRadio.querySelector('div').style.background=isEmail?'transparent':'white';
+  // Icon color
+  smsCard.querySelector('i').style.color=isEmail?'var(--n500)':'var(--g600)';
+  smsCard.querySelector('.mgc_comment_line, [class*="mgc_comment"]');
+}
 
 go('s-login');
 // Init scroll-compact after a tick so screens are rendered
